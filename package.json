@@ -1,0 +1,32 @@
+{
+	"name": "wallapop",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"css:build": "postcss app.css -o css/styles.css",
+		"css:watch": "postcss app.css -o css/styles.css --watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gmoralrubio/practica-frontend-js.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/gmoralrubio/practica-frontend-js/issues"
+	},
+	"homepage": "https://github.com/gmoralrubio/practica-frontend-js#readme",
+	"dependencies": {
+		"@tailwindcss/postcss": "^4.2.2",
+		"daisyui": "^5.5.19",
+		"postcss": "^8.5.10",
+		"tailwindcss": "^4.2.2"
+	},
+	"devDependencies": {
+		"postcss-cli": "^11.0.1"
+	}
+}
