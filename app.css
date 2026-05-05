@@ -4,3 +4,7 @@
 @theme {
 	--font-sans: satoshi, sans-serif;
 }
+
+.is-loading {
+	@apply h-dvh flex justify-center items-center;
+}
