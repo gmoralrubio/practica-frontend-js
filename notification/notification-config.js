@@ -7,7 +7,7 @@ export const NOTIFICATION_STATUS = {
 export const NOTIFICATION_ACTIONS = {
 	login: {
 		textBtn: 'Iniciar sesión',
-		url: '/login',
+		url: '/login.html',
 	},
 }
 
