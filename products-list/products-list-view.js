@@ -2,7 +2,10 @@ export const createProductListElement = (product) => {
 	const productElement = document.createElement('div')
 	productElement.classList.add('card', 'bg-base-100', 'min-w-96', 'shadow-sm')
 	productElement.innerHTML = `
-	<figure>
+	<figure class="relative">
+		<div class="absolute top-4 right-4 badge badge-soft badge-secondary">
+			${product.category}
+		</div>
 		<img class="aspect-square object-cover"
 		src="${product.image}"
 		alt="${product.name}" />
@@ -16,4 +19,8 @@ export const createProductListElement = (product) => {
 		</div>
 	</div>`
 	return productElement
+}
+
+const createProductTypeBadge = (type) => {
+	return ''
 }
