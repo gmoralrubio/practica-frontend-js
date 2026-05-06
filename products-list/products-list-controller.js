@@ -1,3 +1,4 @@
+import { NOTIFICATION_TYPE } from '../notification/notification-config.js'
 import { getProducts } from './products-list-model.js'
 import { createProductListElement } from './products-list-view.js'
 
@@ -13,7 +14,7 @@ export const productsListController = async (productsContainer) => {
 		const productsLoadFailed = new CustomEvent('productsLoadFailed', {
 			detail: {
 				message: 'No ha sido posible obtener tweets',
-				type: 'error',
+				type: NOTIFICATION_TYPE.error,
 			},
 		})
 		productsContainer.dispatchEvent(productsLoadFailed)
