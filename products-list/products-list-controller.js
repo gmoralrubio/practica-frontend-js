@@ -12,26 +12,14 @@ export const productsListController = async (productsContainer) => {
 		productsContainer.dispatchEvent(productsLoadStarted)
 
 		const products = await getProducts()
+
 		if (products.length === 0) {
-			const noProductsFounded = new CustomEvent('noProductsFounded', {
-				detail: {
-					title: 'No hay ningún producto añadido',
-					message:
-						'Para poder añadir productos, primero tienes que iniciar sesión',
-					action: NOTIFICATION_ACTIONS.login,
-				},
-			})
-			productsContainer.dispatchEvent(noProductsFounded)
+			handleNoProductFounded(productsContainer)
 		}
+
 		showProducts(products, productsContainer)
 	} catch (error) {
-		const productsLoadFailed = new CustomEvent('productsLoadFailed', {
-			detail: {
-				message: 'No ha sido posible obtener tweets',
-				status: NOTIFICATION_STATUS.error,
-			},
-		})
-		productsContainer.dispatchEvent(productsLoadFailed)
+		handleProductsLoadFailed(productsContainer)
 	} finally {
 		const productsLoadEnded = new CustomEvent('productsLoadEnded')
 		productsContainer.dispatchEvent(productsLoadEnded)
@@ -43,4 +31,25 @@ const showProducts = (products, productsContainer) => {
 		const newProductElement = createProductListElement(product)
 		productsContainer.appendChild(newProductElement)
 	})
+}
+
+const handleNoProductFounded = (productsContainer) => {
+	const noProductsFounded = new CustomEvent('noProductsFounded', {
+		detail: {
+			title: 'No hay ningún producto añadido',
+			message: 'Para poder añadir productos, primero tienes que iniciar sesión',
+			action: NOTIFICATION_ACTIONS.login,
+		},
+	})
+	productsContainer.dispatchEvent(noProductsFounded)
+}
+
+const handleProductsLoadFailed = (productsContainer) => {
+	const productsLoadFailed = new CustomEvent('productsLoadFailed', {
+		detail: {
+			message: 'No ha sido posible obtener tweets',
+			status: NOTIFICATION_STATUS.error,
+		},
+	})
+	productsContainer.dispatchEvent(productsLoadFailed)
 }
