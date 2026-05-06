@@ -1,8 +1,8 @@
-import { NOTIFICATION_ICON } from './notification-config.js'
+import { NOTIFICATION_ICON, NOTIFICATION_VARIANTS } from './notification-config.js'
 
 export const createNotificationElement = (message, type) => {
 	const notificationElement = document.createElement('div')
-	notificationElement.classList.add('alert', `alert-${type}`, 'mt-4')
+	notificationElement.classList.add(...NOTIFICATION_VARIANTS[type])
 	const iconElement = document.createElement('span')
 	iconElement.innerHTML = NOTIFICATION_ICON[type] ?? ''
 	const notificationMessage = document.createElement('span')
