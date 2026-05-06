@@ -1,5 +1,3 @@
-import { NOTIFICATION_TYPE } from './notification/notification-config.js'
-
 import { loaderController } from './loader/loader-controller.js'
 import { notificationController } from './notification/notification-controller.js'
 import { productsListController } from './products-list/products-list-controller.js'
@@ -14,6 +12,10 @@ const { showNotification } = notificationController(notificationContainer)
 productsContainer.addEventListener('productsLoadStarted', showLoader)
 productsContainer.addEventListener('productsLoadEnded', hideLoader)
 productsContainer.addEventListener('productsLoadFailed', (e) => {
+	const { message, type } = e.detail
+	showNotification(message, type)
+})
+productsContainer.addEventListener('noProductsFounded', (e) => {
 	const { message, type } = e.detail
 	showNotification(message, type)
 })

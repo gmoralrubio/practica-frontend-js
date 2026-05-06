@@ -20,7 +20,3 @@ export const createProductListElement = (product) => {
 	</div>`
 	return productElement
 }
-
-const createProductTypeBadge = (type) => {
-	return ''
-}

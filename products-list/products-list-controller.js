@@ -9,6 +9,15 @@ export const productsListController = async (productsContainer) => {
 		productsContainer.dispatchEvent(productsLoadStarted)
 
 		const products = await getProducts()
+		if (products.length === 0) {
+			const noProductsFounded = new CustomEvent('noProductsFounded', {
+				detail: {
+					message: 'No hay ningún producto añadido',
+					type: NOTIFICATION_TYPE.info,
+				},
+			})
+			productsContainer.dispatchEvent(noProductsFounded)
+		}
 		showProducts(products, productsContainer)
 	} catch (error) {
 		const productsLoadFailed = new CustomEvent('productsLoadFailed', {
