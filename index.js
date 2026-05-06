@@ -7,17 +7,16 @@ const loaderContainer = document.querySelector('.loader-container')
 const notificationContainer = document.querySelector('.notification-container')
 
 const { showLoader, hideLoader } = loaderController(loaderContainer)
-const { showNotification } = notificationController(notificationContainer)
+const { showPermanentNotification, showTemporalNotification } =
+	notificationController(notificationContainer)
 
 productsContainer.addEventListener('productsLoadStarted', showLoader)
 productsContainer.addEventListener('productsLoadEnded', hideLoader)
 productsContainer.addEventListener('productsLoadFailed', (e) => {
-	const { message, type } = e.detail
-	showNotification(message, type)
+	showTemporalNotification(e.detail)
 })
 productsContainer.addEventListener('noProductsFounded', (e) => {
-	const { message, type } = e.detail
-	showNotification(message, type)
+	showPermanentNotification(e.detail)
 })
 
 productsListController(productsContainer)

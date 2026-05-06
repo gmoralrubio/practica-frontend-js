@@ -1,4 +1,7 @@
-import { NOTIFICATION_TYPE } from '../notification/notification-config.js'
+import {
+	NOTIFICATION_ACTIONS,
+	NOTIFICATION_STATUS,
+} from '../notification/notification-config.js'
 import { getProducts } from './products-list-model.js'
 import { createProductListElement } from './products-list-view.js'
 
@@ -12,8 +15,10 @@ export const productsListController = async (productsContainer) => {
 		if (products.length === 0) {
 			const noProductsFounded = new CustomEvent('noProductsFounded', {
 				detail: {
-					message: 'No hay ningún producto añadido',
-					type: NOTIFICATION_TYPE.info,
+					title: 'No hay ningún producto añadido',
+					message:
+						'Para poder añadir productos, primero tienes que iniciar sesión',
+					action: NOTIFICATION_ACTIONS.login,
 				},
 			})
 			productsContainer.dispatchEvent(noProductsFounded)
@@ -23,7 +28,7 @@ export const productsListController = async (productsContainer) => {
 		const productsLoadFailed = new CustomEvent('productsLoadFailed', {
 			detail: {
 				message: 'No ha sido posible obtener tweets',
-				type: NOTIFICATION_TYPE.error,
+				status: NOTIFICATION_STATUS.error,
 			},
 		})
 		productsContainer.dispatchEvent(productsLoadFailed)

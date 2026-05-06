@@ -1,7 +1,14 @@
-export const NOTIFICATION_TYPE = {
+export const NOTIFICATION_STATUS = {
 	error: 'error',
 	success: 'success',
 	info: 'info',
+}
+
+export const NOTIFICATION_ACTIONS = {
+	login: {
+		textBtn: 'Iniciar sesión',
+		url: '/login',
+	},
 }
 
 export const NOTIFICATION_VARIANTS = {

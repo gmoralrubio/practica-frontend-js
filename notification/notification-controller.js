@@ -1,13 +1,21 @@
-import { createNotificationElement } from './notification-view.js'
+import {
+	createTemporalNotificationElement,
+	createPermanentNotificationElement,
+} from './notification-view.js'
 
 export const notificationController = (notificationContainer) => {
-	const showNotification = (message, type) => {
-		const notificationElement = createNotificationElement(message, type)
-		notificationContainer.appendChild(notificationElement)
+	const showTemporalNotification = (notificationInfo) => {
+		const temporalNotification = createTemporalNotificationElement(notificationInfo)
+		notificationContainer.appendChild(temporalNotification)
 		setTimeout(() => {
-			notificationElement.remove()
+			temporalNotification.remove()
 		}, 5000)
 	}
 
-	return { showNotification }
+	const showPermanentNotification = (notificationInfo) => {
+		const permanentNotification = createPermanentNotificationElement(notificationInfo)
+		notificationContainer.appendChild(permanentNotification)
+	}
+
+	return { showTemporalNotification, showPermanentNotification }
 }
