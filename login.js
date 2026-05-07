@@ -4,11 +4,9 @@ import { notificationController } from './notification/notification-controller.j
 const notificationContainer = document.querySelector('.notification-container')
 const loginForm = document.querySelector('#login-form')
 
-const { showTemporalNotification } = notificationController(notificationContainer)
+const { showNotification } = notificationController(notificationContainer)
 
-loginForm.addEventListener('userLoginSucceeded', (e) =>
-	showTemporalNotification(e.detail),
-)
-loginForm.addEventListener('userLoginFailed', (e) => showTemporalNotification(e.detail))
+loginForm.addEventListener('userLoginSucceeded', (e) => showNotification(e.detail))
+loginForm.addEventListener('userLoginFailed', (e) => showNotification(e.detail))
 
 loginController(loginForm)

@@ -4,13 +4,6 @@ export const NOTIFICATION_STATUS = {
 	info: 'info',
 }
 
-export const NOTIFICATION_ACTIONS = {
-	login: {
-		textBtn: 'Iniciar sesión',
-		url: '/login.html',
-	},
-}
-
 export const NOTIFICATION_VARIANTS = {
 	error: {
 		classes: ['alert', 'alert-error', 'mt-4'],

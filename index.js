@@ -9,21 +9,15 @@ const notificationContainer = document.querySelector('.notification-container')
 const sessionContainer = document.querySelector('.session-container')
 
 const { showLoader, hideLoader } = loaderController(loaderContainer)
-const { showPermanentNotification, showTemporalNotification } =
-	notificationController(notificationContainer)
+const { showNotification } = notificationController(notificationContainer)
 
 productsContainer.addEventListener('productsLoadStarted', showLoader)
 productsContainer.addEventListener('productsLoadEnded', hideLoader)
 productsContainer.addEventListener('productsLoadFailed', (e) => {
-	showTemporalNotification(e.detail)
-})
-productsContainer.addEventListener('noProductsFounded', (e) => {
-	showPermanentNotification(e.detail)
+	showNotification(e.detail)
 })
 
-sessionContainer.addEventListener('userInfoNotFounded', (e) =>
-	showTemporalNotification(e.detail),
-)
+sessionContainer.addEventListener('userInfoNotFounded', (e) => showNotification(e.detail))
 
 productsListController(productsContainer)
 sessionController(sessionContainer)
