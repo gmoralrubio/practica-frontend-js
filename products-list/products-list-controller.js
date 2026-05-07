@@ -1,12 +1,8 @@
-import {
-	NOTIFICATION_ACTIONS,
-	NOTIFICATION_STATUS,
-} from '../notification/notification-config.js'
+import { NOTIFICATION_STATUS } from '../notification/notification-config.js'
 import { getProducts } from './products-list-model.js'
-import { createProductListElement } from './products-list-view.js'
+import { createEmptyProductList, createProductList } from './products-list-view.js'
 
 export const productsListController = async (productsContainer) => {
-	productsContainer.innerHTML = ''
 	try {
 		const productsLoadStarted = new CustomEvent('productsLoadStarted')
 		productsContainer.dispatchEvent(productsLoadStarted)
@@ -14,12 +10,13 @@ export const productsListController = async (productsContainer) => {
 		const products = await getProducts()
 
 		if (products.length === 0) {
-			handleNoProductFounded(productsContainer)
+			const emptyProductList = createEmptyProductList()
+			productsContainer.appendChild(emptyProductList)
+		} else {
+			showProducts(products, productsContainer)
 		}
-
-		showProducts(products, productsContainer)
 	} catch (error) {
-		handleProductsLoadFailed(productsContainer)
+		handleProductsLoadFailed(productsContainer, error)
 	} finally {
 		const productsLoadEnded = new CustomEvent('productsLoadEnded')
 		productsContainer.dispatchEvent(productsLoadEnded)
@@ -27,27 +24,19 @@ export const productsListController = async (productsContainer) => {
 }
 
 const showProducts = (products, productsContainer) => {
+	const productsWrapper = productsContainer.querySelector('.products-wrapper')
+	productsWrapper.innerHTML = ''
 	products.forEach((product) => {
-		const newProductElement = createProductListElement(product)
-		productsContainer.appendChild(newProductElement)
+		const newProductElement = createProductList(product)
+
+		productsWrapper.appendChild(newProductElement)
 	})
 }
 
-const handleNoProductFounded = (productsContainer) => {
-	const noProductsFounded = new CustomEvent('noProductsFounded', {
-		detail: {
-			title: 'No hay ningún producto añadido',
-			message: 'Para poder añadir productos, primero tienes que iniciar sesión',
-			action: NOTIFICATION_ACTIONS.login,
-		},
-	})
-	productsContainer.dispatchEvent(noProductsFounded)
-}
-
-const handleProductsLoadFailed = (productsContainer) => {
+const handleProductsLoadFailed = (productsContainer, error) => {
 	const productsLoadFailed = new CustomEvent('productsLoadFailed', {
 		detail: {
-			message: 'No ha sido posible obtener tweets',
+			message: 'No ha sido posible obtener productos',
 			status: NOTIFICATION_STATUS.error,
 		},
 	})

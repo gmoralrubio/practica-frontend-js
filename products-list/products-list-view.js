@@ -1,4 +1,4 @@
-export const createProductListElement = (product) => {
+export const createProductList = (product) => {
 	const productElement = document.createElement('div')
 	productElement.classList.add('card', 'bg-base-100', 'min-w-96', 'shadow-sm')
 	productElement.innerHTML = `
@@ -19,4 +19,21 @@ export const createProductListElement = (product) => {
 		</div>
 	</div>`
 	return productElement
+}
+
+export const createEmptyProductList = () => {
+	const emptyProductList = document.createElement('div')
+	emptyProductList.classList.add('hero', 'min-h-screen')
+	emptyProductList.innerHTML = `
+		<div class="hero-content text-center">
+			<div class="max-w-md">
+			<h1 class="text-5xl font-bold">No hay ningún producto añadido</h1>
+			<p class="py-6 text-balance">
+				Para poder añadir productos, primero tienes que iniciar sesión
+			</p>
+			<a href="/login.html" class="btn btn-primary">Iniciar sesión</a>
+			</div>
+		</div>`
+
+	return emptyProductList
 }
