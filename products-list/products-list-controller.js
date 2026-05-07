@@ -1,8 +1,12 @@
 import { NOTIFICATION_STATUS } from '../notification/notification-config.js'
 import { getProducts } from './products-list-model.js'
-import { createEmptyProductList, createProductList } from './products-list-view.js'
+import {
+	createEmptyProductList,
+	createProductList,
+	createProductListWrapper,
+} from './products-list-view.js'
 
-export const productsListController = async (productsContainer) => {
+export const productsListController = async (productsContainer, loggedUserInfo) => {
 	try {
 		const productsLoadStarted = new CustomEvent('productsLoadStarted')
 		productsContainer.dispatchEvent(productsLoadStarted)
@@ -24,13 +28,13 @@ export const productsListController = async (productsContainer) => {
 }
 
 const showProducts = (products, productsContainer) => {
-	const productsWrapper = productsContainer.querySelector('.products-wrapper')
-	productsWrapper.innerHTML = ''
+	const productListWrapper = createProductListWrapper()
 	products.forEach((product) => {
 		const newProductElement = createProductList(product)
 
-		productsWrapper.appendChild(newProductElement)
+		productListWrapper.appendChild(newProductElement)
 	})
+	productsContainer.appendChild(productListWrapper)
 }
 
 const handleProductsLoadFailed = (productsContainer, error) => {
