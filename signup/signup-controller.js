@@ -22,14 +22,14 @@ export const signupController = (signupForm) => {
 				const userCreated = new CustomEvent('userCreated', {
 					detail: {
 						message:
-							'Usuario creado con éxito. En breve serás redirigido a la página principal',
+							'Usuario creado con éxito. En breve serás redirigido a la página principal.',
 						status: NOTIFICATION_STATUS.success,
 					},
 				})
 				signupForm.dispatchEvent(userCreated)
 				setTimeout(() => {
 					window.location = '/'
-				}, 6000)
+				}, 4000)
 			} catch (error) {
 				const userNotCreated = new CustomEvent('userNotCreated', {
 					detail: {
