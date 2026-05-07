@@ -21,17 +21,34 @@ export const createProductList = (product) => {
 	return productElement
 }
 
+export const createProductListWrapper = () => {
+	const productListWrapper = document.createElement('div')
+	productListWrapper.classList.add('products-wrapper')
+	return productListWrapper
+}
+
 export const createEmptyProductList = () => {
+	const isUserLogged = localStorage.getItem('token') ? true : false
 	const emptyProductList = document.createElement('div')
 	emptyProductList.classList.add('hero', 'min-h-screen')
 	emptyProductList.innerHTML = `
 		<div class="hero-content text-center">
 			<div class="max-w-md">
-			<h1 class="text-5xl font-bold">No hay ningún producto añadido</h1>
-			<p class="py-6 text-balance">
-				Para poder añadir productos, primero tienes que iniciar sesión
-			</p>
-			<a href="/login.html" class="btn btn-primary">Iniciar sesión</a>
+				<h1 class="text-5xl font-bold">No hay ningún producto añadido</h1>
+				<p class="py-6 text-balance">
+				${
+					isUserLogged
+						? 'Empieza a añadir productos al listado'
+						: 'Para poder añadir productos, primero tienes que iniciar sesión o registrarte si aún no lo has hecho'
+				}
+				</p>
+				${
+					isUserLogged
+						? '<a href="/login.html" class="btn btn-primary">Añadir producto</a>'
+						: `
+						<a href="/login.html" class="btn btn-soft btn-primary">Registrarse</a>
+						<a href="/login.html" class="btn btn-primary">Iniciar sesión</a>`
+				}
 			</div>
 		</div>`
 
