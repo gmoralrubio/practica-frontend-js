@@ -1,0 +1,162 @@
+[
+	{
+		"id": 1,
+		"name": "Laptop Dell XPS 15",
+		"description": "Portátil de alto rendimiento con pantalla OLED 4K, procesador Intel Core i9, 32GB RAM y 1TB SSD.",
+		"price": 1899.99,
+		"image": "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 2,
+		"name": "iPhone 15 Pro Max",
+		"description": "Smartphone Apple con chip A17 Pro, cámara de 48MP, pantalla Super Retina XDR de 6.7 pulgadas.",
+		"price": 1299.99,
+		"image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 3,
+		"name": "Auriculares Sony WH-1000XM5",
+		"description": "Auriculares inalámbricos con cancelación de ruido líder del sector, 30 horas de batería y audio Hi-Res.",
+		"price": 349.99,
+		"image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 4,
+		"name": "Monitor LG UltraWide 34\"",
+		"description": "Monitor curvo ultrawide QHD 3440x1440, panel IPS, 144Hz, compatible con HDR10 y FreeSync Premium.",
+		"price": 599.99,
+		"image": "https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 5,
+		"name": "Teclado mecánico Keychron Q1",
+		"description": "Teclado mecánico TKL con switches Gateron G Pro Red, cuerpo de aluminio anodizado y retroiluminación RGB.",
+		"price": 169.99,
+		"image": "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 6,
+		"name": "Cámara Sony Alpha A7 IV",
+		"description": "Cámara mirrorless full-frame de 33MP, grabación 4K60, estabilización de 5 ejes y batería de larga duración.",
+		"price": 2499.99,
+		"image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 7,
+		"name": "Silla ergonómica Herman Miller Aeron",
+		"description": "Silla de oficina premium con soporte lumbar ajustable, reposabrazos 4D y tejido transpirable 8Z Pellicle.",
+		"price": 1495,
+		"image": "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 8,
+		"name": "iPad Pro 12.9\" M2",
+		"description": "Tablet Apple con chip M2, pantalla Liquid Retina XDR, compatible con Apple Pencil 2 y Magic Keyboard.",
+		"price": 1099.99,
+		"image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 9,
+		"name": "Ratón Logitech MX Master 3S",
+		"description": "Ratón inalámbrico de alta precisión con sensor de 8000 DPI, carga USB-C y scroll electromagnético MagSpeed.",
+		"price": 99.99,
+		"image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 10,
+		"name": "Disco SSD Samsung 990 Pro 2TB",
+		"description": "SSD NVMe PCIe 4.0 con velocidades de lectura de hasta 7450 MB/s y escritura de 6900 MB/s.",
+		"price": 179.99,
+		"image": "https://images.unsplash.com/photo-1628557044797-f21a177c37ec?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 11,
+		"name": "Impresora 3D Bambu Lab X1C",
+		"description": "Impresora 3D multicolor de alta velocidad con sistema AMS, lidar integrado y cámara AI para detección de fallos.",
+		"price": 1199.99,
+		"image": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 12,
+		"name": "Altavoces Sonos Era 300",
+		"description": "Altavoces inteligentes con sonido espacial Dolby Atmos, compatible con Apple AirPlay 2 y Spotify Connect.",
+		"price": 449.99,
+		"image": "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 13,
+		"name": "Nintendo Switch OLED",
+		"description": "Consola portátil con pantalla OLED de 7 pulgadas, 64GB de almacenamiento y base mejorada con LAN.",
+		"price": 349.99,
+		"image": "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 14,
+		"name": "Smartwatch Apple Watch Ultra 2",
+		"description": "Reloj inteligente de titanio con GPS de doble frecuencia, resistencia al agua de 100m y batería de 60 horas.",
+		"price": 799.99,
+		"image": "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 15,
+		"name": "Router Wi-Fi 7 ASUS ROG Rapture",
+		"description": "Router gaming tribanda Wi-Fi 7 con velocidades de hasta 19000 Mbps, 10G WAN y sistema de antenas adaptativas.",
+		"price": 599.99,
+		"image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 16,
+		"name": "Proyector Epson EH-TW9400",
+		"description": "Proyector 4K PRO-UHD con 2600 lúmenes, contraste de 1.000.000:1, HDR10 y pantalla de hasta 500 pulgadas.",
+		"price": 2299.99,
+		"image": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 17,
+		"name": "Drone DJI Air 3",
+		"description": "Dron con cámara dual, vídeo 4K/60fps con HDR, tiempo de vuelo de 46 minutos y detección omnidireccional.",
+		"price": 1099.99,
+		"image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 18,
+		"name": "Tarjeta gráfica NVIDIA RTX 4080 Super",
+		"description": "GPU de alto rendimiento con 16GB GDDR6X, arquitectura Ada Lovelace, ray tracing y DLSS 3.5.",
+		"price": 999.99,
+		"image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600",
+		"category": "venta"
+	},
+	{
+		"id": 19,
+		"name": "Kindle Scribe 64GB",
+		"description": "E-reader con pantalla de 10.2 pulgadas a 300 ppi, incluye stylus Premium Pen y 64GB de almacenamiento.",
+		"price": 369.99,
+		"image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600",
+		"category": "compra"
+	},
+	{
+		"id": 20,
+		"name": "Hub USB-C Anker 12-en-1",
+		"description": "Hub multiport con HDMI 4K@60Hz dual, 10Gbps USB-C, lector de tarjetas SD/microSD y carga de 85W.",
+		"price": 79.99,
+		"image": "https://images.unsplash.com/photo-1625842268584-8f3296236761?w=600",
+		"category": "venta"
+	}
+]

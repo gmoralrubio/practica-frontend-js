@@ -25,11 +25,21 @@
 
 <body class="bg-taupe-50 min-h-screen">
   <div class="max-w-7xl mx-auto px-4">
-    <header class="pt-8 ">
-      <h1 class="font-black text-4xl ">Wallaclon</h1>
+
+    <header class="navbar bg-base-100 shadow-sm">
+      <div class="navbar-start">
+        <a
+          href="/"
+          class="font-bold text-3xl"
+        >Wallaclon</a>
+      </div>
+
+      <div class="navbar-end session-container space-x-3"></div>
     </header>
+
     <section class="notification-container"></section>
     <section class="loader-container"></section>
+
     <main class="products-container max-w-7xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 py-8 "></main>
   </div>
 
