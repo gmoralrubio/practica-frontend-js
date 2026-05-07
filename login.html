@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="/assets/favicon.ico"
+  >
+  <link
+    href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="css/styles.css"
+  >
+  <title>Login</title>
+</head>
+
+<body class="bg-taupe-50 min-h-screen">
+  <div class="max-w-7xl mx-auto px-4">
+    <header class="pt-8">
+      <h1 class="font-black text-4xl">Wallaclon</h1>
+    </header>
+    <section class="notification-container"></section>
+    <section class="loader-container"></section>
+    <main class="flex justify-center mt-20">
+      <form
+        class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+        id="login-form"
+      >
+
+        <fieldset class="fieldset">
+          <label
+            for="email"
+            class="label"
+          >Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="input"
+            placeholder="Email"
+            required
+          />
+          <span
+            class="hint text-red-500"
+            id="email-hint"
+          ></span>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <label
+            for="password"
+            class="label"
+          >Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="input"
+            placeholder="Contraseña"
+            minlength="6"
+            required
+          />
+        </fieldset>
+
+
+        <button
+          class="btn btn-primary mt-4"
+          type="submit"
+        >Iniciar sesión</button>
+        <a
+          href="/"
+          class="btn btn-ghost mt-1"
+        >Volver</a>
+      </form>
+    </main>
+  </div>
+
+  <script
+    type="module"
+    src="login.js"
+  ></script>
+</body>
+
+</html>
