@@ -16,7 +16,8 @@ export const sessionController = async (sessionContainer) => {
 			const logoutBtn = sessionContainer.querySelector('#logout-btn')
 			logoutBtn.addEventListener('click', () => {
 				localStorage.removeItem('token')
-				sessionController(sessionContainer)
+				// sessionController(sessionContainer)
+				window.location = '/'
 			})
 		} catch (error) {
 			const userInfoNotFounded = new CustomEvent('userInfoNotFounded', {
