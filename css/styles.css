@@ -765,6 +765,9 @@
   .max-w-md {
     max-width: var(--container-md);
   }
+  .min-w-80 {
+    min-width: calc(var(--spacing) * 80);
+  }
   .min-w-96 {
     min-width: calc(var(--spacing) * 96);
   }
@@ -1039,7 +1042,7 @@
   @media (width >= 48rem) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  @media (width >= 80rem) {
+  @media (width >= 64rem) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

@@ -11,12 +11,19 @@ export const loginController = (loginForm) => {
 		const password = form.get('password')
 
 		try {
+			const userLoginStarted = new CustomEvent('userLoginStarted')
+			loginForm.dispatchEvent(userLoginStarted)
+
 			const token = await loginUser(email, password)
 			localStorage.setItem('token', token)
 			setSessionNotification({
 				message: 'Inicio de sesión exitoso.',
 				status: NOTIFICATION_STATUS.success,
 			})
+
+			const userLoginEnded = new CustomEvent('userLoginEnded')
+			loginForm.dispatchEvent(userLoginEnded)
+
 			window.location = '/'
 		} catch (error) {
 			const userLoginFailed = new CustomEvent('userLoginFailed', {

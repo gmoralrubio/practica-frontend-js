@@ -18,6 +18,9 @@ export const signupController = (signupForm) => {
 			passwordsMatches(password, passwordConfirm, signupForm)
 		) {
 			try {
+				const userSignupStarted = new CustomEvent('userSignupStarted')
+				signupForm.dispatchEvent(userSignupStarted)
+
 				await createUser(email, password)
 				const userCreated = new CustomEvent('userCreated', {
 					detail: {
@@ -26,6 +29,10 @@ export const signupController = (signupForm) => {
 					},
 				})
 				signupForm.dispatchEvent(userCreated)
+
+				const userSignupEnded = new CustomEvent('userSignupEnded')
+				signupForm.dispatchEvent(userSignupEnded)
+
 				setSessionNotification({
 					message: 'Usuario creado con éxito.',
 					status: NOTIFICATION_STATUS.success,
