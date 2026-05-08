@@ -1,4 +1,4 @@
-import { NOTIFICATION_STATUS } from '../notification/notification-config.js'
+import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-config.js'
 import { getProducts } from './products-list-model.js'
 import {
 	createEmptyProductList,

@@ -1,12 +1,12 @@
-import { newProductController } from './new-product/new-product-controller.js'
-import { loaderController } from './loader/loader-controller.js'
-import { notificationController } from './notification/notification-controller.js'
-import { productsListController } from './products-list/products-list-controller.js'
+import { newProductController } from '../modules/products/new-product/new-product-controller.js'
+import { loaderController } from '../shared/loader/loader-controller.js'
+import { notificationController } from '../shared/notification/notification-controller.js'
+import { productsListController } from '../modules/products/products-list/products-list-controller.js'
 import {
 	getSessionNotification,
 	removeSessionNotification,
-} from './session-notification/session-notification-controller.js'
-import { sessionController } from './session/session-controller.js'
+} from '../shared/session-notification/session-notification-controller.js'
+import { sessionController } from '../modules/session/session-controller.js'
 
 const loaderContainer = document.querySelector('.loader-container')
 const notificationContainer = document.querySelector('.notification-container')

@@ -7,10 +7,10 @@ export const createAuthenticatedSession = (username) => {
 
 export const createUnauthenticatedSession = () => {
 	return `
-		<a href="/signup.html" class="btn btn-sm btn-soft btn-primary">
+		<a href="signup.html" class="btn btn-sm btn-soft btn-primary">
 			Registrarse
 		</button>
-		<a href="/login.html" class="btn btn-sm btn-primary">
+		<a href="login.html" class="btn btn-sm btn-primary">
 			Iniciar sesión
 		</button>
 	`

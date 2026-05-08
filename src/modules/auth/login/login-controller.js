@@ -1,5 +1,5 @@
-import { NOTIFICATION_STATUS } from '../notification/notification-config.js'
-import { setSessionNotification } from '../session-notification/session-notification-controller.js'
+import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-config.js'
+import { setSessionNotification } from '../../../shared/session-notification/session-notification-controller.js'
 import { loginUser } from './login-model.js'
 
 export const loginController = (loginForm) => {
@@ -24,7 +24,7 @@ export const loginController = (loginForm) => {
 			const userLoginEnded = new CustomEvent('userLoginEnded')
 			loginForm.dispatchEvent(userLoginEnded)
 
-			window.location = '/'
+			window.location = 'index.html'
 		} catch (error) {
 			const userLoginFailed = new CustomEvent('userLoginFailed', {
 				detail: {

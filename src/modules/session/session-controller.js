@@ -1,4 +1,4 @@
-import { NOTIFICATION_STATUS } from '../notification/notification-config.js'
+import { NOTIFICATION_STATUS } from '../../shared/notification/notification-config.js'
 import { getLoggedUserInfo } from './session-model.js'
 import {
 	createAuthenticatedSession,
@@ -17,7 +17,7 @@ export const sessionController = async (sessionContainer) => {
 			logoutBtn.addEventListener('click', () => {
 				localStorage.removeItem('token')
 				// sessionController(sessionContainer)
-				window.location = '/'
+				window.location = 'index.html'
 			})
 		} catch (error) {
 			const userInfoNotFounded = new CustomEvent('userInfoNotFounded', {

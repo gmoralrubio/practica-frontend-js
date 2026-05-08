@@ -44,10 +44,10 @@ export const createEmptyProductList = () => {
 				</p>
 				${
 					isUserLogged
-						? '<a href="/login.html" class="btn btn-primary">Añadir producto</a>'
+						? '<a href="#" class="btn btn-primary">Añadir producto</a>'
 						: `
-						<a href="/login.html" class="btn btn-soft btn-primary">Registrarse</a>
-						<a href="/login.html" class="btn btn-primary">Iniciar sesión</a>`
+						<a href="signup.html" class="btn btn-soft btn-primary">Registrarse</a>
+						<a href="login.html" class="btn btn-primary">Iniciar sesión</a>`
 				}
 			</div>
 		</div>`

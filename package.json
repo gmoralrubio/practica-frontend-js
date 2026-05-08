@@ -5,8 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"css:build": "postcss app.css -o css/styles.css",
-		"css:watch": "postcss app.css -o css/styles.css --watch"
+		"css:build": "postcss src/app.css -o dist/styles.css",
+		"css:watch": "postcss src/app.css -o dist/styles.css --watch"
 	},
 	"repository": {
 		"type": "git",

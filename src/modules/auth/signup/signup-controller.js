@@ -1,5 +1,5 @@
-import { NOTIFICATION_STATUS } from '../notification/notification-config.js'
-import { setSessionNotification } from '../session-notification/session-notification-controller.js'
+import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-config.js'
+import { setSessionNotification } from '../../../shared/session-notification/session-notification-controller.js'
 import { createUser } from './signup-model.js'
 
 export const signupController = (signupForm) => {

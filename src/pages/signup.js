@@ -1,8 +1,8 @@
-import { loginUser } from './login/login-model.js'
-import { NOTIFICATION_STATUS } from './notification/notification-config.js'
-import { notificationController } from './notification/notification-controller.js'
-import { signupController } from './signup/signup-controller.js'
-import { loaderController } from './loader/loader-controller.js'
+import { loginUser } from '../modules/auth/login/login-model.js'
+import { NOTIFICATION_STATUS } from '../shared/notification/notification-config.js'
+import { notificationController } from '../shared/notification/notification-controller.js'
+import { signupController } from '../modules/auth/signup/signup-controller.js'
+import { loaderController } from '../shared/loader/loader-controller.js'
 
 const notificationContainer = document.querySelector('.notification-container')
 const loaderContainer = document.querySelector('.loader-container')
@@ -19,7 +19,7 @@ signupForm.addEventListener('userCreated', async (e) => {
 	try {
 		const token = await loginUser(e.detail.username, e.detail.password)
 		localStorage.setItem('token', token)
-		window.location = '/'
+		window.location = 'index.html'
 	} catch (error) {
 		showNotification({
 			message: error,
