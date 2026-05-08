@@ -12,8 +12,10 @@ export const createUser = async (email, password) => {
 		}),
 	})
 
+	const data = await response.json()
 	if (!response.ok) {
-		const data = await response.json()
 		throw new Error(data.message)
+	} else {
+		return data
 	}
 }

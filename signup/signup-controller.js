@@ -19,11 +19,17 @@ export const signupController = (signupForm) => {
 		) {
 			try {
 				await createUser(email, password)
+				const userCreated = new CustomEvent('userCreated', {
+					detail: {
+						username: email,
+						password,
+					},
+				})
+				signupForm.dispatchEvent(userCreated)
 				setSessionNotification({
 					message: 'Usuario creado con éxito.',
 					status: NOTIFICATION_STATUS.success,
 				})
-				window.location = '/'
 			} catch (error) {
 				const userNotCreated = new CustomEvent('userNotCreated', {
 					detail: {
