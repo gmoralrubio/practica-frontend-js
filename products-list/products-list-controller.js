@@ -6,7 +6,7 @@ import {
 	createProductListWrapper,
 } from './products-list-view.js'
 
-export const productsListController = async (productsContainer, loggedUserInfo) => {
+export const productsListController = async (productsContainer) => {
 	try {
 		const productsLoadStarted = new CustomEvent('productsLoadStarted')
 		productsContainer.dispatchEvent(productsLoadStarted)
@@ -20,7 +20,7 @@ export const productsListController = async (productsContainer, loggedUserInfo) 
 			showProducts(products, productsContainer)
 		}
 	} catch (error) {
-		handleProductsLoadFailed(productsContainer, error)
+		handleProductsLoadFailed(productsContainer)
 	} finally {
 		const productsLoadEnded = new CustomEvent('productsLoadEnded')
 		productsContainer.dispatchEvent(productsLoadEnded)
@@ -37,7 +37,7 @@ const showProducts = (products, productsContainer) => {
 	productsContainer.appendChild(productListWrapper)
 }
 
-const handleProductsLoadFailed = (productsContainer, error) => {
+const handleProductsLoadFailed = (productsContainer) => {
 	const productsLoadFailed = new CustomEvent('productsLoadFailed', {
 		detail: {
 			message: 'No ha sido posible obtener productos',
