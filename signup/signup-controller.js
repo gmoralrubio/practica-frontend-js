@@ -1,4 +1,5 @@
 import { NOTIFICATION_STATUS } from '../notification/notification-config.js'
+import { setSessionNotification } from '../session-notification/session-notification-controller.js'
 import { createUser } from './signup-model.js'
 
 export const signupController = (signupForm) => {
@@ -18,18 +19,11 @@ export const signupController = (signupForm) => {
 		) {
 			try {
 				await createUser(email, password)
-				resetInputs(signupForm)
-				const userCreated = new CustomEvent('userCreated', {
-					detail: {
-						message:
-							'Usuario creado con éxito. En breve serás redirigido a la página principal.',
-						status: NOTIFICATION_STATUS.success,
-					},
+				setSessionNotification({
+					message: 'Usuario creado con éxito.',
+					status: NOTIFICATION_STATUS.success,
 				})
-				signupForm.dispatchEvent(userCreated)
-				setTimeout(() => {
-					window.location = '/'
-				}, 4000)
+				window.location = '/'
 			} catch (error) {
 				const userNotCreated = new CustomEvent('userNotCreated', {
 					detail: {
@@ -46,10 +40,6 @@ export const signupController = (signupForm) => {
 const resetHints = (signupForm) => {
 	const hints = signupForm.querySelectorAll('.hint')
 	hints.forEach((hint) => (hint.textContent = ''))
-}
-const resetInputs = (signupForm) => {
-	const inputs = signupForm.querySelectorAll('input')
-	inputs.forEach((input) => (input.value = ''))
 }
 
 const isEmailValid = (email, signupForm) => {

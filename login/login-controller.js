@@ -1,4 +1,5 @@
 import { NOTIFICATION_STATUS } from '../notification/notification-config.js'
+import { setSessionNotification } from '../session-notification/session-notification-controller.js'
 import { loginUser } from './login-model.js'
 
 export const loginController = (loginForm) => {
@@ -12,20 +13,12 @@ export const loginController = (loginForm) => {
 		try {
 			const token = await loginUser(email, password)
 			localStorage.setItem('token', token)
-			const userLoginSucceeded = new CustomEvent('userLoginSucceeded', {
-				detail: {
-					message:
-						'Inicio de sesión exitoso. En breve serás redirigido a la página principal',
-					status: NOTIFICATION_STATUS.success,
-				},
+			setSessionNotification({
+				message: 'Inicio de sesión exitoso.',
+				status: NOTIFICATION_STATUS.success,
 			})
-			loginForm.dispatchEvent(userLoginSucceeded)
-			setTimeout(() => {
-				window.location = '/'
-			}, 4000)
+			window.location = '/'
 		} catch (error) {
-			console.log(error)
-
 			const userLoginFailed = new CustomEvent('userLoginFailed', {
 				detail: {
 					message: error,

@@ -6,7 +6,6 @@ const loginForm = document.querySelector('#login-form')
 
 const { showNotification } = notificationController(notificationContainer)
 
-loginForm.addEventListener('userLoginSucceeded', (e) => showNotification(e.detail))
 loginForm.addEventListener('userLoginFailed', (e) => showNotification(e.detail))
 
 loginController(loginForm)
