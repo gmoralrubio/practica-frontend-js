@@ -1,6 +1,6 @@
 export const createProductList = (product) => {
 	const productElement = document.createElement('div')
-	productElement.classList.add('card', 'bg-base-100', 'min-w-96', 'shadow-sm')
+	productElement.classList.add('card', 'bg-base-100', 'shadow-sm')
 	productElement.innerHTML = `
 	<figure class="relative">
 		<div class="absolute top-4 right-4 badge badge-soft badge-secondary">
