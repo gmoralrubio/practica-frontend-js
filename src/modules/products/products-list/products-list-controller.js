@@ -28,6 +28,7 @@ export const productsListController = async (productsContainer) => {
 }
 
 const showProducts = (products, productsContainer) => {
+	productsContainer.innerHTML = ''
 	const productListWrapper = createProductListWrapper()
 	products.forEach((product) => {
 		const newProductElement = createProductList(product)

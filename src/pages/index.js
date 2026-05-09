@@ -14,16 +14,30 @@ const sessionContainer = document.querySelector('.session-container')
 const productsContainer = document.querySelector('.products-container')
 const newProductActionContainer = document.querySelector('.new-product-action-container')
 const modal = document.querySelector('#modal')
+const modalLoaderContainer = document.querySelector('.modal-loader-container')
+const modalNotificationContainer = document.querySelector('.modal-notification-container')
 
 const { showLoader, hideLoader } = loaderController(loaderContainer)
 const { showNotification } = notificationController(notificationContainer)
 
+// Product list eventos
 productsContainer.addEventListener('productsLoadStarted', showLoader)
 productsContainer.addEventListener('productsLoadEnded', hideLoader)
 productsContainer.addEventListener('productsLoadFailed', (e) => {
 	showNotification(e.detail)
 })
 sessionContainer.addEventListener('userInfoNotFounded', (e) => showNotification(e.detail))
+
+// New product eventos
+newProductActionContainer.addEventListener('productCreationStarted', showLoader)
+newProductActionContainer.addEventListener('productCreationEnded', hideLoader)
+newProductActionContainer.addEventListener('productCreationFailed', (e) =>
+	showNotification(e.detail),
+)
+newProductActionContainer.addEventListener('productCreationSucceeded', (e) => {
+	showNotification(e.detail)
+	productsListController(productsContainer)
+})
 
 const sessionNotification = await getSessionNotification('sessionNotification')
 if (sessionNotification) {

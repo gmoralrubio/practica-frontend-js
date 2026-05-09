@@ -7,7 +7,7 @@ export const createProductList = (product) => {
 			${product.category}
 		</div>
 		<img class="aspect-square object-cover"
-		src="${product.image}"
+		src="${product.image ? product.image : 'https://placehold.co/600?text=Image+not+found'}"
 		alt="${product.name}" />
 	</figure>
 	<div class="card-body gap-3">

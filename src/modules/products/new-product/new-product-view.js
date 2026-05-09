@@ -102,6 +102,7 @@ export const createNewProductForm = () => {
 				placeholder="Descripción"
 				id="product-description"
 				name="product-description"
+				required
 			></textarea>
 			<span
 				class="hint text-red-500"
@@ -116,13 +117,11 @@ export const createNewProductForm = () => {
 			>Imagen (opcional)</label>
 						
 			<input
-				type="url"
+				type="text"
 				name="product-image"
 				id="product-image"
 				placeholder="https://"
-				value="https://"
-				class="input grow w-full"
-				required
+				class="input w-full"
 			/>
 
 			<span
