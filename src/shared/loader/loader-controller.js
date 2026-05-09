@@ -1,13 +1,13 @@
 import { createLoader } from './loader-view.js'
 
-export const loaderController = (loaderContainer) => {
+export const loaderController = () => {
 	const loader = createLoader()
 
-	const showLoader = () => {
+	const showLoader = (loaderContainer) => {
 		loaderContainer.innerHTML = loader
 		loaderContainer.classList.add('is-loading')
 	}
-	const hideLoader = () => {
+	const hideLoader = (loaderContainer) => {
 		loaderContainer.innerHTML = ''
 		loaderContainer.classList.remove('is-loading')
 	}

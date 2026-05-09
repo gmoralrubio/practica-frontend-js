@@ -7,10 +7,10 @@ const loaderContainer = document.querySelector('.loader-container')
 const loginForm = document.querySelector('#login-form')
 
 const { showNotification } = notificationController(notificationContainer)
-const { showLoader, hideLoader } = loaderController(loaderContainer)
+const { showLoader, hideLoader } = loaderController()
 
-loginForm.addEventListener('userLoginStarted', showLoader)
-loginForm.addEventListener('userLoginEnded', hideLoader)
+loginForm.addEventListener('userLoginStarted', () => showLoader(loaderContainer))
+loginForm.addEventListener('userLoginEnded', () => hideLoader(loaderContainer))
 loginForm.addEventListener('userLoginFailed', (e) => showNotification(e.detail))
 
 loginController(loginForm)
