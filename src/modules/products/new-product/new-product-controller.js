@@ -2,7 +2,7 @@ import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-c
 import { createNewProduct } from './new-product-model.js'
 import { createNewProductAction, createNewProductForm } from './new-product-view.js'
 
-export const newProductController = (newProductActionContainer) => {
+export const newProductController = (newProductActionContainer, modalInnerContainer) => {
 	const token = localStorage.getItem('token')
 
 	if (token) {
@@ -53,8 +53,7 @@ export const newProductController = (newProductActionContainer) => {
 			}
 		})
 
-		const modalContainer = document.querySelector('.modal-content')
-		modalContainer.appendChild(newProductForm)
+		modalInnerContainer.appendChild(newProductForm)
 	}
 }
 
