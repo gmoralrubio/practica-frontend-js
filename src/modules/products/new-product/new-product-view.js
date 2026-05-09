@@ -17,7 +17,7 @@ export const createNewProductAction = () => {
 
 export const createNewProductForm = () => {
 	const newProductForm = document.createElement('form')
-	newProductForm.setAttribute('id', 'new-product-form')
+	newProductForm.classList.add('new-product-form')
 	newProductForm.innerHTML = `
 		<fieldset class="fieldset">
 			<label
