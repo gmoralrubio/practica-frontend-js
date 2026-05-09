@@ -7,30 +7,40 @@ import {
 	removeSessionNotification,
 } from '../shared/session-notification/session-notification-controller.js'
 import { sessionController } from '../modules/session/session-controller.js'
+import { modalController } from '../shared/modal/modal-controller.js'
 
 const loaderContainer = document.querySelector('.loader-container')
 const notificationContainer = document.querySelector('.notification-container')
 const sessionContainer = document.querySelector('.session-container')
 const productsContainer = document.querySelector('.products-container')
 const newProductActionContainer = document.querySelector('.new-product-action-container')
-const modal = document.querySelector('#modal')
+const modalContainer = document.querySelector('.modal-container')
 const modalLoaderContainer = document.querySelector('.modal-loader-container')
-const modalNotificationContainer = document.querySelector('.modal-notification-container')
 
-const { showLoader, hideLoader } = loaderController(loaderContainer)
+const { showLoader, hideLoader } = loaderController()
 const { showNotification } = notificationController(notificationContainer)
+const { openModal, closeModal } = modalController(modalContainer)
 
 // Product list eventos
-productsContainer.addEventListener('productsLoadStarted', showLoader)
-productsContainer.addEventListener('productsLoadEnded', hideLoader)
+productsContainer.addEventListener('productsLoadStarted', () =>
+	showLoader(loaderContainer),
+)
+productsContainer.addEventListener('productsLoadEnded', () => hideLoader(loaderContainer))
 productsContainer.addEventListener('productsLoadFailed', (e) => {
 	showNotification(e.detail)
 })
 sessionContainer.addEventListener('userInfoNotFounded', (e) => showNotification(e.detail))
 
 // New product eventos
-newProductActionContainer.addEventListener('productCreationStarted', showLoader)
-newProductActionContainer.addEventListener('productCreationEnded', hideLoader)
+newProductActionContainer.addEventListener('newProductBtnClicked', openModal)
+newProductActionContainer.addEventListener('closeModalBtnClicked', closeModal)
+newProductActionContainer.addEventListener('productCreationStarted', () => {
+	showLoader(modalLoaderContainer)
+})
+newProductActionContainer.addEventListener('productCreationEnded', () => {
+	hideLoader(modalLoaderContainer)
+	closeModal()
+})
 newProductActionContainer.addEventListener('productCreationFailed', (e) =>
 	showNotification(e.detail),
 )
@@ -47,4 +57,4 @@ if (sessionNotification) {
 
 sessionController(sessionContainer)
 productsListController(productsContainer)
-newProductController(newProductActionContainer, modal)
+newProductController(newProductActionContainer)

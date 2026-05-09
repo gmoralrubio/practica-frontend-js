@@ -2,21 +2,26 @@ import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-c
 import { createNewProduct } from './new-product-model.js'
 import { createNewProductAction, createNewProductForm } from './new-product-view.js'
 
-export const newProductController = (newProductActionContainer, modal) => {
+export const newProductController = (newProductActionContainer) => {
 	const token = localStorage.getItem('token')
 
 	if (token) {
 		const newProductAction = createNewProductAction()
 		newProductActionContainer.appendChild(newProductAction)
-		const newProductBtn = newProductActionContainer.querySelector('#new-product-btn')
-		// Los métodos showModal() y close() los proporciona DaisyUI (https://daisyui.com/components/modal/#method-1-html-dialog-element-recommended)
-		newProductBtn.addEventListener('click', () => modal.showModal())
+		const newProductBtn = newProductActionContainer.querySelector('.new-product-btn')
 
-		const modalContainer = modal.querySelector('.modal-container')
+		newProductBtn.addEventListener('click', () => {
+			const newProductBtnClicked = new CustomEvent('newProductBtnClicked')
+			newProductActionContainer.dispatchEvent(newProductBtnClicked)
+		})
+
 		const newProductForm = createNewProductForm()
 
 		const closeModalBtn = newProductForm.querySelector('.close-modal-btn')
-		closeModalBtn.addEventListener('click', () => modal.close())
+		closeModalBtn.addEventListener('click', () => {
+			const closeModalBtnClicked = new CustomEvent('closeModalBtnClicked')
+			newProductActionContainer.dispatchEvent(closeModalBtnClicked)
+		})
 
 		newProductForm.addEventListener('submit', async (e) => {
 			e.preventDefault()
@@ -34,7 +39,9 @@ export const newProductController = (newProductActionContainer, modal) => {
 			try {
 				const productCreationStarted = new CustomEvent('productCreationStarted')
 				newProductActionContainer.dispatchEvent(productCreationStarted)
+
 				await createNewProduct(newProduct)
+
 				handleProductCreationSucceeded(newProductActionContainer)
 			} catch (error) {
 				handleProductCreationFailed(newProductActionContainer, error)
@@ -42,10 +49,10 @@ export const newProductController = (newProductActionContainer, modal) => {
 				const productCreationEnded = new CustomEvent('productCreationEnded')
 				newProductActionContainer.dispatchEvent(productCreationEnded)
 				newProductForm.reset()
-				modal.close()
 			}
 		})
 
+		const modalContainer = document.querySelector('.modal-content')
 		modalContainer.appendChild(newProductForm)
 	}
 }

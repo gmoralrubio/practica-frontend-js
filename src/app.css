@@ -20,7 +20,7 @@
 }
 
 .is-loading {
-	@apply h-dvh flex justify-center items-center;
+	@apply h-56 flex justify-center items-center;
 }
 
 .products-wrapper {

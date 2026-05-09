@@ -9,7 +9,7 @@ export const createNewProductAction = () => {
 	)
 	newProductAction.innerHTML = `
 		<div>
-			<button class="btn btn-primary" id="new-product-btn">Añadir productos</button>
+			<button class="btn btn-primary new-product-btn">Añadir productos</button>
 		</div>`
 
 	return newProductAction
