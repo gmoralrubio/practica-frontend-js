@@ -21,13 +21,15 @@ signupForm.addEventListener('userCreated', async (e) => {
 		localStorage.setItem('token', token)
 		window.location = 'index.html'
 	} catch (error) {
-		showNotification({
+		showNotification(notificationContainer, {
 			message: error,
 			status: NOTIFICATION_STATUS.error,
 		})
 	}
 })
-signupForm.addEventListener('userNotCreated', (e) => showNotification(e.detail))
+signupForm.addEventListener('userNotCreated', (e) =>
+	showNotification(notificationContainer, e.detail),
+)
 
 signupController(signupForm)
 

@@ -1,7 +1,7 @@
 import { createNotification } from './notification-view.js'
 
-export const notificationController = (notificationContainer) => {
-	const showNotification = (notificationInfo) => {
+export const notificationController = () => {
+	const showNotification = (notificationContainer, notificationInfo) => {
 		const temporalNotification = createNotification(notificationInfo)
 		notificationContainer.appendChild(temporalNotification)
 		setTimeout(() => {

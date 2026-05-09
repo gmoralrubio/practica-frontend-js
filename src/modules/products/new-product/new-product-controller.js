@@ -43,12 +43,13 @@ export const newProductController = (newProductActionContainer) => {
 				await createNewProduct(newProduct)
 
 				handleProductCreationSucceeded(newProductActionContainer)
+
+				newProductForm.reset()
 			} catch (error) {
-				handleProductCreationFailed(newProductActionContainer, error)
+				handleProductCreationFailed(newProductActionContainer)
 			} finally {
 				const productCreationEnded = new CustomEvent('productCreationEnded')
 				newProductActionContainer.dispatchEvent(productCreationEnded)
-				newProductForm.reset()
 			}
 		})
 
@@ -57,10 +58,10 @@ export const newProductController = (newProductActionContainer) => {
 	}
 }
 
-const handleProductCreationFailed = (newProductActionContainer, error) => {
+const handleProductCreationFailed = (newProductActionContainer) => {
 	const productCreationFailed = new CustomEvent('productCreationFailed', {
 		detail: {
-			message: error,
+			message: 'No ha sido posible añadir el producto.',
 			status: NOTIFICATION_STATUS.error,
 		},
 	})

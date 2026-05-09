@@ -15,11 +15,17 @@ const sessionContainer = document.querySelector('.session-container')
 const productsContainer = document.querySelector('.products-container')
 const newProductActionContainer = document.querySelector('.new-product-action-container')
 const modalContainer = document.querySelector('.modal-container')
-const modalLoaderContainer = document.querySelector('.modal-loader-container')
 
 const { showLoader, hideLoader } = loaderController()
-const { showNotification } = notificationController(notificationContainer)
+const { showNotification } = notificationController()
 const { openModal, closeModal } = modalController(modalContainer)
+
+const modalLoaderContainer = document.querySelector('.modal-loader-container')
+const modalNotificationContainer = document.querySelector('.modal-notification-container')
+
+sessionContainer.addEventListener('userInfoNotFounded', (e) =>
+	showNotification(notificationContainer, e.detail),
+)
 
 // Product list eventos
 productsContainer.addEventListener('productsLoadStarted', () =>
@@ -27,9 +33,8 @@ productsContainer.addEventListener('productsLoadStarted', () =>
 )
 productsContainer.addEventListener('productsLoadEnded', () => hideLoader(loaderContainer))
 productsContainer.addEventListener('productsLoadFailed', (e) => {
-	showNotification(e.detail)
+	showNotification(notificationContainer, e.detail)
 })
-sessionContainer.addEventListener('userInfoNotFounded', (e) => showNotification(e.detail))
 
 // New product eventos
 newProductActionContainer.addEventListener('newProductBtnClicked', openModal)
@@ -39,19 +44,19 @@ newProductActionContainer.addEventListener('productCreationStarted', () => {
 })
 newProductActionContainer.addEventListener('productCreationEnded', () => {
 	hideLoader(modalLoaderContainer)
-	closeModal()
 })
 newProductActionContainer.addEventListener('productCreationFailed', (e) =>
-	showNotification(e.detail),
+	showNotification(modalNotificationContainer, e.detail),
 )
 newProductActionContainer.addEventListener('productCreationSucceeded', (e) => {
-	showNotification(e.detail)
+	closeModal()
+	showNotification(notificationContainer, e.detail)
 	productsListController(productsContainer)
 })
 
 const sessionNotification = await getSessionNotification('sessionNotification')
 if (sessionNotification) {
-	showNotification(sessionNotification)
+	showNotification(notificationContainer, sessionNotification)
 	removeSessionNotification('sessionNotification')
 }
 

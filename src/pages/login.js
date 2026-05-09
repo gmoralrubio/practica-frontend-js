@@ -11,6 +11,8 @@ const { showLoader, hideLoader } = loaderController()
 
 loginForm.addEventListener('userLoginStarted', () => showLoader(loaderContainer))
 loginForm.addEventListener('userLoginEnded', () => hideLoader(loaderContainer))
-loginForm.addEventListener('userLoginFailed', (e) => showNotification(e.detail))
+loginForm.addEventListener('userLoginFailed', (e) =>
+	showNotification(notificationContainer, e.detail),
+)
 
 loginController(loginForm)

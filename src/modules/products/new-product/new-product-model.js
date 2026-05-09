@@ -1,6 +1,4 @@
 export const createNewProduct = async (newProduct) => {
-	console.log(newProduct)
-
 	const url = 'http://localhost:8000/api/products'
 	const token = localStorage.getItem('token')
 
