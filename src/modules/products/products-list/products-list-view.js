@@ -1,4 +1,8 @@
+import { formatNumberToEuro } from '../../../utils/utils.js'
+
 export const createProductList = (product) => {
+	const readablePrice = formatNumberToEuro(product.price)
+
 	const productElement = document.createElement('div')
 	productElement.classList.add('card', 'bg-base-100', 'shadow-sm')
 	productElement.innerHTML = `
@@ -7,15 +11,15 @@ export const createProductList = (product) => {
 			${product.category}
 		</div>
 		<img class="aspect-square object-cover"
-		src="${product.image ? product.image : 'https://placehold.co/600?text=Image+not+found'}"
+		src="${product.image}"
 		alt="${product.name}" />
 	</figure>
 	<div class="card-body gap-3">
 		<h2 class="card-title">${product.name}</h2>
 		<p>${product.description}</p>
-		<p class="text-lg">${product.price}€</p>
+		<p class="text-lg">${readablePrice}</p>
 		<div class="card-actions justify-end">
-			<button class="btn btn-primary">Ver producto</button>
+			<a href="product-detail.html?id=${product.id}" class="btn btn-primary">Ver producto</a>
 		</div>
 	</div>`
 	return productElement
