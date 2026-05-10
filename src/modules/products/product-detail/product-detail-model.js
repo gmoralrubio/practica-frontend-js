@@ -5,7 +5,7 @@ export const getProductById = async (id) => {
 	const product = await response.json()
 
 	if (!response.ok) {
-		throw new Error('El producto no existe')
+		throw new Error(data.message)
 	}
 
 	return product
