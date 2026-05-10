@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="/public/assets/favicon.ico"
+  >
+  <link
+    href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="../dist/styles.css"
+  >
+  <title>Wallaclon</title>
+</head>
+
+<body class="bg-taupe-50 min-h-screen">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <header class="navbar bg-base-100 shadow-sm">
+      <div class="navbar-start">
+        <a
+          href="index.html"
+          class="font-bold text-3xl"
+        >Wallaclon</a>
+      </div>
+
+      <div class="navbar-end session-container space-x-3"></div>
+    </header>
+
+    <section class="notification-container"></section>
+    <section class="loader-container"></section>
+
+    <main class="product-detail-container py-8">
+      <div class="max-w-4xl mx-auto">
+
+
+      </div>
+    </main>
+
+    <dialog class="modal">
+      <div class="modal-box w-md modal-inner-container">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <div class="modal-loader-container"></div>
+        <div class="modal-notification-container"></div>
+      </div>
+      <form
+        method="dialog"
+        class="modal-backdrop"
+      >
+        <button>close</button>
+      </form>
+    </dialog>
+
+  </div>
+
+  <script
+    type="module"
+    src="../src/pages/product-detail.js"
+  ></script>
+</body>
+
+</html>
