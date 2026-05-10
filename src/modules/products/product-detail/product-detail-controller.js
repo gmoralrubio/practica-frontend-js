@@ -11,8 +11,11 @@ export const productDetailController = async (container, getLoggedUserInfo) => {
 	const searchParams = new URLSearchParams(window.location.search)
 	const productId = searchParams.get('id')
 
-	if (!productId) window.location = 'index.html'
-
+	if (!productId) {
+		window.location = 'index.html'
+		return
+	}
+	container.innerHTML = ''
 	try {
 		const productLoadStarted = new CustomEvent('productLoadStarted')
 		container.dispatchEvent(productLoadStarted)
@@ -61,7 +64,7 @@ const handleUserActions = async (container, product, getLoggedUserInfo) => {
 const handleEditProduct = (container, product) => {
 	const editProductBtn = createEditProductBtn()
 	editProductBtn.addEventListener('click', async () => {
-		const editPoductBtnClicked = new CustomEvent('editPoductBtnClicked', {
+		const editPoductBtnClicked = new CustomEvent('editProductBtnClicked', {
 			detail: { product },
 		})
 		container.dispatchEvent(editPoductBtnClicked)
