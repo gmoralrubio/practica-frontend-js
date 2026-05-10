@@ -37,7 +37,10 @@ const handleFormSubmit = async (e, form, container) => {
 		price: formData.get('product-price'),
 		category: formData.get('product-category'),
 		description: formData.get('product-description'),
-		image: formData.get('product-image'),
+		image:
+			formData.get('product-image') === ''
+				? 'https://placehold.co/600?text=Image+not+provided'
+				: formData.get('product-image'),
 	}
 
 	try {
