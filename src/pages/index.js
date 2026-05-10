@@ -41,12 +41,12 @@ newProductActionContainer.addEventListener('newProductBtnClicked', () =>
 newProductActionContainer.addEventListener('closeModalBtnClicked', () => modal.close())
 newProductActionContainer.addEventListener('productCreationStarted', () => {
 	const form = modal.querySelector('.new-product-form')
-	form.classList.add('hidden')
+	form?.classList.add('hidden')
 	showLoader(modalLoaderContainer)
 })
 newProductActionContainer.addEventListener('productCreationEnded', () => {
 	const form = modal.querySelector('.new-product-form')
-	form.classList.remove('hidden')
+	form?.classList.remove('hidden')
 	hideLoader(modalLoaderContainer)
 })
 newProductActionContainer.addEventListener('productCreationFailed', (e) =>
