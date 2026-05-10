@@ -48,6 +48,7 @@ export const createNewProductForm = () => {
 					type="number"
 					name="product-price"
 					id="product-price"
+					step="0.01"
 					class="input w-full"
 					placeholder="Precio"
 					min="1"
