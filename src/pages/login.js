@@ -9,8 +9,14 @@ const loginForm = document.querySelector('#login-form')
 const { showNotification } = notificationController(notificationContainer)
 const { showLoader, hideLoader } = loaderController()
 
-loginForm.addEventListener('userLoginStarted', () => showLoader(loaderContainer))
-loginForm.addEventListener('userLoginEnded', () => hideLoader(loaderContainer))
+loginForm.addEventListener('userLoginStarted', () => {
+	loginForm.classList.add('hidden')
+	showLoader(loaderContainer)
+})
+loginForm.addEventListener('userLoginEnded', () => {
+	loginForm.classList.remove('hidden')
+	hideLoader(loaderContainer)
+})
 loginForm.addEventListener('userLoginFailed', (e) =>
 	showNotification(notificationContainer, e.detail),
 )

@@ -11,8 +11,14 @@ const signupForm = document.querySelector('#signup-form')
 const { showNotification } = notificationController(notificationContainer)
 const { showLoader, hideLoader } = loaderController()
 
-signupForm.addEventListener('userSignupStarted', () => showLoader(loaderContainer))
-signupForm.addEventListener('userSignupEnded', () => hideLoader(loaderContainer))
+signupForm.addEventListener('userSignupStarted', () => {
+	signupForm.classList.add('hidden')
+	showLoader(loaderContainer)
+})
+signupForm.addEventListener('userSignupEnded', () => {
+	signupForm.classList.remove('hidden')
+	hideLoader(loaderContainer)
+})
 signupForm.addEventListener('emailNotValid', (e) => handleNotValidField(e))
 signupForm.addEventListener('passwordMismatch', (e) => handleNotValidField(e))
 signupForm.addEventListener('userCreated', async (e) => {
