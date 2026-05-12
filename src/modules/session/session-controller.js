@@ -16,10 +16,12 @@ export const sessionController = async (sessionContainer) => {
 			const logoutBtn = sessionContainer.querySelector('#logout-btn')
 			logoutBtn.addEventListener('click', () => {
 				localStorage.removeItem('token')
-				// sessionController(sessionContainer)
 				window.location = 'index.html'
 			})
 		} catch (error) {
+			localStorage.removeItem('token')
+			sessionContainer.innerHTML = createUnauthenticatedSession()
+
 			const userInfoNotFounded = new CustomEvent('userInfoNotFounded', {
 				detail: {
 					message: 'No ha sido posible obtener la información del usuario',
