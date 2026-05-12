@@ -75,8 +75,7 @@ const handleUserActions = async (container, product, getLoggedUserInfo) => {
 }
 
 const handleEditProduct = (product) => {
-	const modal = document.querySelector('.modal')
-	const modalInnerContainer = modal.querySelector('.modal-inner-container')
+	const modalInnerContainer = document.querySelector('.modal-inner-container')
 	const editProductForm = createEditProductForm(product)
 	const closeModalBtn = editProductForm.querySelector('.close-modal-btn')
 
@@ -129,10 +128,10 @@ const handleDeleteProduct = (product) => {
 			modalContainer.dispatchEvent(productOperationStarted)
 
 			await deleteProduct(product.id)
+
 			handleProductDeletionSucceeded()
 		} catch (error) {
 			handleProductOperationFailed(modalContainer)
-			console.log(error)
 		} finally {
 			const productOperationEnded = new CustomEvent('productOperationEnded')
 			modalContainer.dispatchEvent(productOperationEnded)
