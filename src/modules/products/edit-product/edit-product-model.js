@@ -1,4 +1,4 @@
-export const updatedProduct = async (id, content) => {
+export const updateProduct = async (id, content) => {
 	const url = `http://localhost:8000/api/products/${id}`
 	const token = localStorage.getItem('token')
 
