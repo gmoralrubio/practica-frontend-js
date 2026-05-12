@@ -1,3 +1,4 @@
+import { deleteProductController } from '../modules/products/delete-product/delete-product-controller.js'
 import { editProductController } from '../modules/products/edit-product/edit-product-controller.js'
 import { productDetailController } from '../modules/products/product-detail/product-detail-controller.js'
 import { sessionController } from '../modules/session/session-controller.js'
@@ -32,6 +33,7 @@ productDetailContainer.addEventListener('userDataFailed', (e) => {
 })
 
 productDetailContainer.addEventListener('removeProductBtnClicked', (e) => {
+	deleteProductController(modalInnerContainer, e.detail.product)
 	modal.showModal()
 })
 
@@ -62,6 +64,27 @@ modalInnerContainer.addEventListener('productEditionSucceeded', (e) => {
 	showNotification(notificationContainer, e.detail)
 	productDetailController(productDetailContainer, getLoggedUserInfo)
 })
+
+// Delete product
+modalInnerContainer.addEventListener('productDeletionStarted', () => {
+	const form = modal.querySelector('.delete-product-form')
+	form?.classList.add('hidden')
+	showLoader(modalLoaderContainer)
+})
+
+modalInnerContainer.addEventListener('productDeletionEnded', () => {
+	const form = modal.querySelector('.delete-product-form')
+	form?.classList.remove('hidden')
+	hideLoader(modalLoaderContainer)
+})
+
+modalInnerContainer.addEventListener('productDeletionSucceeded', (e) => {
+	modal.close()
+})
+
+modalInnerContainer.addEventListener('productDeletionFailed', (e) =>
+	showNotification(modalNotificationContainer, e.detail),
+)
 
 modalInnerContainer.addEventListener('closeModalBtnClicked', () => modal.close())
 
