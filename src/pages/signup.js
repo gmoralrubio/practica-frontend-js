@@ -3,9 +3,11 @@ import { NOTIFICATION_STATUS } from '../shared/notification/notification-config.
 import { notificationController } from '../shared/notification/notification-controller.js'
 import { signupController } from '../modules/auth/signup/signup-controller.js'
 import { loaderController } from '../shared/loader/loader-controller.js'
+import { sessionController } from '../modules/session/session-controller.js'
 
 const notificationContainer = document.querySelector('.notification-container')
 const loaderContainer = document.querySelector('.loader-container')
+const sessionContainer = document.querySelector('.session-container')
 const signupForm = document.querySelector('#signup-form')
 
 const { showNotification } = notificationController(notificationContainer)
@@ -19,8 +21,7 @@ signupForm.addEventListener('userSignupEnded', () => {
 	signupForm.classList.remove('hidden')
 	hideLoader(loaderContainer)
 })
-signupForm.addEventListener('emailNotValid', (e) => handleNotValidField(e))
-signupForm.addEventListener('passwordMismatch', (e) => handleNotValidField(e))
+
 signupForm.addEventListener('userCreated', async (e) => {
 	try {
 		const token = await loginUser(e.detail.username, e.detail.password)
@@ -37,9 +38,5 @@ signupForm.addEventListener('userNotCreated', (e) =>
 	showNotification(notificationContainer, e.detail),
 )
 
+sessionController(sessionContainer)
 signupController(signupForm)
-
-const handleNotValidField = (e) => {
-	const { hintContainer, message } = e.detail
-	hintContainer.textContent = message
-}

@@ -30,9 +30,6 @@ export const signupController = (signupForm) => {
 				})
 				signupForm.dispatchEvent(userCreated)
 
-				const userSignupEnded = new CustomEvent('userSignupEnded')
-				signupForm.dispatchEvent(userSignupEnded)
-
 				setSessionNotification({
 					message: 'Usuario creado con éxito.',
 					status: NOTIFICATION_STATUS.success,
@@ -45,6 +42,9 @@ export const signupController = (signupForm) => {
 					},
 				})
 				signupForm.dispatchEvent(userNotCreated)
+			} finally {
+				const userSignupEnded = new CustomEvent('userSignupEnded')
+				signupForm.dispatchEvent(userSignupEnded)
 			}
 		}
 	})
@@ -61,13 +61,8 @@ const isEmailValid = (email, signupForm) => {
 
 	if (!validEmail) {
 		const hintContainer = signupForm.querySelector('#email-hint')
-		const emailNotValid = new CustomEvent('emailNotValid', {
-			detail: {
-				message: 'El email no tiene un formato válido',
-				hintContainer,
-			},
-		})
-		signupForm.dispatchEvent(emailNotValid)
+		hintContainer.textContent = 'El email no tiene un formato válido'
+
 		return false
 	}
 	return true
@@ -76,13 +71,8 @@ const isEmailValid = (email, signupForm) => {
 const passwordsMatches = (password, passwordConfirm, signupForm) => {
 	if (password !== passwordConfirm) {
 		const hintContainer = signupForm.querySelector('#password-confirm-hint')
-		const passwordMismatch = new CustomEvent('passwordMismatch', {
-			detail: {
-				message: 'Las contraseñas no coinciden',
-				hintContainer,
-			},
-		})
-		signupForm.dispatchEvent(passwordMismatch)
+		hintContainer.textContent = 'Las contraseñas no coinciden'
+
 		return false
 	}
 	return true
