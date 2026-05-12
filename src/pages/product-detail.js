@@ -1,5 +1,5 @@
-import { deleteProductController } from '../modules/products/delete-product/delete-product-controller.js'
-import { editProductController } from '../modules/products/edit-product/edit-product-controller.js'
+// import { deleteProductController } from '../modules/products/delete-product/delete-product-controller.js'
+// import { editProductController } from '../modules/products/edit-product/edit-product-controller.js'
 import { productDetailController } from '../modules/products/product-detail/product-detail-controller.js'
 import { sessionController } from '../modules/session/session-controller.js'
 import { getLoggedUserInfo } from '../modules/session/session-model.js'
@@ -32,30 +32,23 @@ productDetailContainer.addEventListener('userDataFailed', (e) => {
 	showNotification(notificationContainer, e.detail)
 })
 
-productDetailContainer.addEventListener('removeProductBtnClicked', (e) => {
-	deleteProductController(modalInnerContainer, e.detail.product)
+productDetailContainer.addEventListener('actionProductBtnClicked', (e) => {
 	modal.showModal()
 })
 
-// Product edition
-productDetailContainer.addEventListener('editProductBtnClicked', (e) => {
-	editProductController(modalInnerContainer, e.detail.product)
-	modal.showModal()
-})
-
-modalInnerContainer.addEventListener('productEditionStarted', () => {
-	const form = modal.querySelector('.edit-product-form')
+modalInnerContainer.addEventListener('productOperationStarted', () => {
+	const form = modal.querySelector('.detail-product-form')
 	form?.classList.add('hidden')
 	showLoader(modalLoaderContainer)
 })
 
-modalInnerContainer.addEventListener('productEditionEnded', () => {
-	const form = modal.querySelector('.edit-product-form')
+modalInnerContainer.addEventListener('productOperationEnded', () => {
+	const form = modal.querySelector('.detail-product-form')
 	form?.classList.remove('hidden')
 	hideLoader(modalLoaderContainer)
 })
 
-modalInnerContainer.addEventListener('productEditionFailed', (e) =>
+modalInnerContainer.addEventListener('productOperationFailed', (e) =>
 	showNotification(modalNotificationContainer, e.detail),
 )
 
@@ -66,25 +59,9 @@ modalInnerContainer.addEventListener('productEditionSucceeded', (e) => {
 })
 
 // Delete product
-modalInnerContainer.addEventListener('productDeletionStarted', () => {
-	const form = modal.querySelector('.delete-product-form')
-	form?.classList.add('hidden')
-	showLoader(modalLoaderContainer)
-})
-
-modalInnerContainer.addEventListener('productDeletionEnded', () => {
-	const form = modal.querySelector('.delete-product-form')
-	form?.classList.remove('hidden')
-	hideLoader(modalLoaderContainer)
-})
-
 modalInnerContainer.addEventListener('productDeletionSucceeded', (e) => {
 	modal.close()
 })
-
-modalInnerContainer.addEventListener('productDeletionFailed', (e) =>
-	showNotification(modalNotificationContainer, e.detail),
-)
 
 modalInnerContainer.addEventListener('closeModalBtnClicked', () => modal.close())
 

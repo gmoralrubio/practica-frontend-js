@@ -1,9 +1,11 @@
 import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-config.js'
 import { setSessionNotification } from '../../../shared/session-notification/session-notification-controller.js'
-import { getProductById } from './product-detail-model.js'
+import { deleteProduct, getProductById, updateProduct } from './product-detail-model.js'
 import {
 	createDeleteProductBtn,
+	createDeleteProductForm,
 	createEditProductBtn,
+	createEditProductForm,
 	createProductDetail,
 } from './product-detail-view.js'
 
@@ -45,8 +47,21 @@ const handleUserActions = async (container, product, getLoggedUserInfo) => {
 	try {
 		const loggedUser = await getLoggedUserInfo()
 		if (loggedUser.id === productUserId) {
-			handleEditProduct(container, product)
-			handleRemoveProduct(container, product)
+			const actionContainer = container.querySelector('.product-action-container')
+			const editProductBtn = createEditProductBtn()
+			const deleteProductBtn = createDeleteProductBtn()
+
+			editProductBtn.addEventListener('click', () => {
+				handleEditProduct(product)
+				handleActionBtnClicked(container)
+			})
+			deleteProductBtn.addEventListener('click', () => {
+				handleDeleteProduct(product)
+				handleActionBtnClicked(container)
+			})
+
+			actionContainer.appendChild(editProductBtn)
+			actionContainer.appendChild(deleteProductBtn)
 		}
 	} catch (error) {
 		const userDataFailed = new CustomEvent('userDataFailed', {
@@ -59,26 +74,116 @@ const handleUserActions = async (container, product, getLoggedUserInfo) => {
 	}
 }
 
-const handleEditProduct = (container, product) => {
-	const editProductBtn = createEditProductBtn()
-	editProductBtn.addEventListener('click', async () => {
-		const editPoductBtnClicked = new CustomEvent('editProductBtnClicked', {
-			detail: { product },
-		})
-		container.dispatchEvent(editPoductBtnClicked)
+const handleEditProduct = (product) => {
+	const modal = document.querySelector('.modal')
+	const modalInnerContainer = modal.querySelector('.modal-inner-container')
+	const editProductForm = createEditProductForm(product)
+	const closeModalBtn = editProductForm.querySelector('.close-modal-btn')
+
+	closeModalBtn.addEventListener('click', () =>
+		handleCloseModalClicked(modalInnerContainer),
+	)
+	editProductForm.addEventListener('submit', async (e) => {
+		e.preventDefault()
+
+		const formData = new FormData(editProductForm)
+
+		const updatedContent = {
+			name: formData.get('product-name'),
+			price: formData.get('product-price'),
+			category: formData.get('product-category'),
+			description: formData.get('product-description'),
+			image:
+				formData.get('product-image') ||
+				'https://placehold.co/600?text=Image+not+provided',
+		}
+
+		try {
+			const productOperationStarted = new CustomEvent('productOperationStarted')
+			modalInnerContainer.dispatchEvent(productOperationStarted)
+
+			await updateProduct(product.id, updatedContent)
+
+			handleProductEditionSucceeded(modalInnerContainer)
+		} catch (error) {
+			handleProductOperationFailed(modalInnerContainer)
+		} finally {
+			const productOperationEnded = new CustomEvent('productOperationEnded')
+			modalInnerContainer.dispatchEvent(productOperationEnded)
+		}
 	})
-	const actionContainer = container.querySelector('.product-action-container')
-	actionContainer.appendChild(editProductBtn)
+
+	modalInnerContainer.appendChild(editProductForm)
 }
 
-const handleRemoveProduct = (container, product) => {
-	const removeProductBtn = createDeleteProductBtn()
-	removeProductBtn.addEventListener('click', async () => {
-		const removeProductBtnClicked = new CustomEvent('removeProductBtnClicked', {
-			detail: { product },
-		})
-		container.dispatchEvent(removeProductBtnClicked)
+const handleDeleteProduct = (product) => {
+	const modalContainer = document.querySelector('.modal-inner-container')
+	const deleteProductForm = createDeleteProductForm()
+	const closeModalBtn = deleteProductForm.querySelector('.close-modal-btn')
+	closeModalBtn.addEventListener('click', () => handleCloseModalClicked(modalContainer))
+
+	deleteProductForm.addEventListener('submit', async (e) => {
+		e.preventDefault()
+		try {
+			const productOperationStarted = new CustomEvent('productOperationStarted')
+			modalContainer.dispatchEvent(productOperationStarted)
+
+			await deleteProduct(product.id)
+			handleProductDeletionSucceeded()
+		} catch (error) {
+			handleProductOperationFailed(modalContainer)
+			console.log(error)
+		} finally {
+			const productOperationEnded = new CustomEvent('productOperationEnded')
+			modalContainer.dispatchEvent(productOperationEnded)
+		}
 	})
-	const actionContainer = container.querySelector('.product-action-container')
-	actionContainer.appendChild(removeProductBtn)
+
+	modalContainer.appendChild(deleteProductForm)
+}
+
+const removePreviousForm = (container) => {
+	const form = container.querySelector('.detail-product-form')
+	form?.remove()
+}
+
+const handleActionBtnClicked = (container) => {
+	const actionProductBtnClicked = new CustomEvent('actionProductBtnClicked')
+	container.dispatchEvent(actionProductBtnClicked)
+}
+
+const handleCloseModalClicked = (container) => {
+	const closeModalBtnClicked = new CustomEvent('closeModalBtnClicked')
+	container.dispatchEvent(closeModalBtnClicked)
+	removePreviousForm(container)
+}
+
+const handleProductEditionSucceeded = (container) => {
+	const productEditionSucceeded = new CustomEvent('productEditionSucceeded', {
+		detail: {
+			message: 'Producto editado correctamente',
+			status: NOTIFICATION_STATUS.success,
+		},
+	})
+	container.dispatchEvent(productEditionSucceeded)
+	removePreviousForm(container)
+}
+
+const handleProductDeletionSucceeded = () => {
+	setSessionNotification({
+		message: 'Producto eliminado correctamente.',
+		status: NOTIFICATION_STATUS.success,
+	})
+
+	window.location = 'index.html'
+}
+
+const handleProductOperationFailed = (container) => {
+	const productOperationFailed = new CustomEvent('productOperationFailed', {
+		detail: {
+			message: 'No ha sido posible realizar la operación',
+			status: NOTIFICATION_STATUS.error,
+		},
+	})
+	container.dispatchEvent(productOperationFailed)
 }
