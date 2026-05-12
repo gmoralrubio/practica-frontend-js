@@ -23,8 +23,12 @@ const { showLoader, hideLoader } = loaderController()
 const { showNotification } = notificationController()
 
 // Product details
-productDetailContainer.addEventListener('productLoadStarted', showLoader(loaderContainer))
-productDetailContainer.addEventListener('productLoadEnded', hideLoader(loaderContainer))
+productDetailContainer.addEventListener('productLoadStarted', () =>
+	showLoader(loaderContainer),
+)
+productDetailContainer.addEventListener('productLoadEnded', () =>
+	hideLoader(loaderContainer),
+)
 productDetailContainer.addEventListener('productLoadFailed', (e) => {
 	showNotification(notificationContainer, e.detail)
 })
