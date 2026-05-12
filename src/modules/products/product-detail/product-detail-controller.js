@@ -49,8 +49,6 @@ const handleUserActions = async (container, product, getLoggedUserInfo) => {
 			handleRemoveProduct(container, product)
 		}
 	} catch (error) {
-		console.log(error)
-
 		const userDataFailed = new CustomEvent('userDataFailed', {
 			detail: {
 				message: 'Error al obtener los datos del usuario.',
