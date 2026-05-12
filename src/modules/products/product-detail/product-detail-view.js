@@ -57,10 +57,7 @@ export const createProductDetail = (product) => {
                   </div>
                 </div>
 
-                <div class="product-action-container mt-8 flex gap-3">
-                  <!-- <button class="btn btn-primary flex-1">Editar</button>
-                  <button class="btn btn-error">Eliminar</button> -->
-                </div>
+                <div class="product-action-container mt-8 flex gap-3"></div>
               </div>
 
             </div>
