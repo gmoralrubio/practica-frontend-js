@@ -21,9 +21,6 @@ export const loginController = (loginForm) => {
 				status: NOTIFICATION_STATUS.success,
 			})
 
-			const userLoginEnded = new CustomEvent('userLoginEnded')
-			loginForm.dispatchEvent(userLoginEnded)
-
 			window.location = 'index.html'
 		} catch (error) {
 			const userLoginFailed = new CustomEvent('userLoginFailed', {
@@ -33,6 +30,9 @@ export const loginController = (loginForm) => {
 				},
 			})
 			loginForm.dispatchEvent(userLoginFailed)
+		} finally {
+			const userLoginEnded = new CustomEvent('userLoginEnded')
+			loginForm.dispatchEvent(userLoginEnded)
 		}
 	})
 }
