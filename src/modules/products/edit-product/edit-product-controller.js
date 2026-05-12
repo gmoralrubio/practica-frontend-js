@@ -1,5 +1,5 @@
 import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-config.js'
-import { updatedProduct } from './edit-product-model.js'
+import { updateProduct } from './edit-product-model.js'
 import { createEditProductForm } from './edit-product-view.js'
 
 export const editProductController = (modalContainer, product) => {
@@ -19,16 +19,15 @@ export const editProductController = (modalContainer, product) => {
 			category: formData.get('product-category'),
 			description: formData.get('product-description'),
 			image:
-				formData.get('product-image') === ''
-					? 'https://placehold.co/600?text=Image+not+provided'
-					: formData.get('product-image'),
+				formData.get('product-image') ||
+				'https://placehold.co/600?text=Image+not+provided',
 		}
 
 		try {
 			const productEditionStarted = new CustomEvent('productEditionStarted')
 			modalContainer.dispatchEvent(productEditionStarted)
 
-			await updatedProduct(product.id, updatedContent)
+			await updateProduct(product.id, updatedContent)
 
 			handleProductEditionSucceeded(modalContainer)
 		} catch (error) {
