@@ -2,11 +2,11 @@ export const getProductById = async (id) => {
 	const url = `http://localhost:8000/api/products/${id}?_expand=user`
 
 	const response = await fetch(url)
-	const product = await response.json()
+	const data = await response.json()
 
 	if (!response.ok) {
 		throw new Error(data.message)
 	}
 
-	return product
+	return data
 }
