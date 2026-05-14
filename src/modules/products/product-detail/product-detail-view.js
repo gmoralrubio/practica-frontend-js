@@ -6,7 +6,7 @@ export const createProductDetail = (product) => {
 
 	const productDetail = document.createElement('div')
 	productDetail.classList.add('max-w-4xl', 'mx-auto')
-	productDetail.innerHTML = /*html*/ `
+	productDetail.innerHTML = `
 		<div class="card bg-base-100 shadow-xl">
           <div class="card-body">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -98,7 +98,7 @@ export const createEditProductBtn = () => {
 export const createEditProductForm = (product) => {
 	const editProductForm = document.createElement('form')
 	editProductForm.classList.add('edit-product-form', 'detail-product-form')
-	editProductForm.innerHTML = /*html*/ `
+	editProductForm.innerHTML = `
 		<fieldset class="fieldset">
 			<label
 				for="product-name"
@@ -241,7 +241,7 @@ export const createDeleteProductBtn = () => {
 export const createDeleteProductForm = () => {
 	const deleteProductForm = document.createElement('form')
 	deleteProductForm.classList.add('delete-product-form', 'detail-product-form')
-	deleteProductForm.innerHTML = /*html*/ `
+	deleteProductForm.innerHTML = `
 		<p class="text-lg font-semibold">¿Estás seguro que deseas eliminar el producto?</p>
 		<p class="py-4">Esta decisión es irreversible</p>
 		<div>

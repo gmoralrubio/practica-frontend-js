@@ -1,22 +1,21 @@
 import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-config.js'
 import { getProducts } from './products-list-model.js'
-import {
-	createEmptyProductList,
-	createProductList,
-	createProductListWrapper,
-} from './products-list-view.js'
+import { createEmptyProductList, createProductList } from './products-list-view.js'
 
-export const productsListController = async (productsContainer) => {
+export const productsListController = async (productsContainer, filters = '') => {
+	const productsWrapper = productsContainer.querySelector('.products-wrapper')
+	const noProductsContainer = productsContainer.querySelector('.no-products-container')
 	try {
 		const productsLoadStarted = new CustomEvent('productsLoadStarted')
 		productsContainer.dispatchEvent(productsLoadStarted)
 
-		const products = await getProducts()
+		const products = await getProducts(filters)
 
 		if (products.length === 0) {
-			const emptyProductList = createEmptyProductList()
-			productsContainer.appendChild(emptyProductList)
+			productsWrapper.innerHTML = ''
+			handleNoProducts(productsContainer)
 		} else {
+			noProductsContainer.innerHTML = ''
 			showProducts(products, productsContainer)
 		}
 	} catch (error) {
@@ -27,15 +26,22 @@ export const productsListController = async (productsContainer) => {
 	}
 }
 
+const handleNoProducts = (productsContainer) => {
+	const noProductsContainer = productsContainer.querySelector('.no-products-container')
+	noProductsContainer.innerHTML = ''
+	const emptyProductList = createEmptyProductList()
+	noProductsContainer.appendChild(emptyProductList)
+}
+
 const showProducts = (products, productsContainer) => {
-	productsContainer.innerHTML = ''
-	const productListWrapper = createProductListWrapper()
+	const productsWrapper = productsContainer.querySelector('.products-wrapper')
+	productsWrapper.innerHTML = ''
 	products.forEach((product) => {
 		const newProductElement = createProductList(product)
 
-		productListWrapper.appendChild(newProductElement)
+		productsWrapper.appendChild(newProductElement)
 	})
-	productsContainer.appendChild(productListWrapper)
+	productsContainer.appendChild(productsWrapper)
 }
 
 const handleProductsLoadFailed = (productsContainer) => {

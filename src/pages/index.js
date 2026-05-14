@@ -7,12 +7,14 @@ import {
 	removeSessionNotification,
 } from '../shared/session-notification/session-notification-controller.js'
 import { sessionController } from '../modules/session/session-controller.js'
+import { filtersController } from '../modules/products/filters/filters-controller.js'
 
 const loaderContainer = document.querySelector('.loader-container')
 const notificationContainer = document.querySelector('.notification-container')
 const sessionContainer = document.querySelector('.session-container')
 const productsContainer = document.querySelector('.products-container')
 const newProductActionContainer = document.querySelector('.new-product-action-container')
+const filtersContainer = document.querySelector('.filters-container')
 const modal = document.querySelector('.modal')
 const modalNotificationContainer = modal.querySelector('.modal-notification-container')
 const modalLoaderContainer = modal.querySelector('.modal-loader-container')
@@ -58,12 +60,19 @@ newProductActionContainer.addEventListener('productCreationSucceeded', (e) => {
 	productsListController(productsContainer)
 })
 
+// Filters
+filtersContainer.addEventListener('filtersChanged', (e) => {
+	const filtersQuery = e.detail.query
+	productsListController(productsContainer, filtersQuery)
+})
+
 const sessionNotification = await getSessionNotification('sessionNotification')
 if (sessionNotification) {
 	showNotification(notificationContainer, sessionNotification)
 	removeSessionNotification('sessionNotification')
 }
 
+filtersController(filtersContainer)
 sessionController(sessionContainer)
 productsListController(productsContainer)
 newProductController(newProductActionContainer, modalInnerContainer)

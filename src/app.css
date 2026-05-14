@@ -23,6 +23,20 @@
 	@apply h-56 flex justify-center items-center;
 }
 
+.content {
+	@apply grid grid-cols-12 py-4 gap-4;
+}
+
+.filters-container {
+	@apply col-span-3 h-80 card rounded-box bg-white p-4 shadow-md;
+}
+
+.no-products-container {
+	@apply col-span-9;
+}
+.products-container {
+	@apply col-span-9;
+}
 .products-wrapper {
-	@apply max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-4;
+	@apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
 }
