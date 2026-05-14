@@ -5,26 +5,26 @@ import { createNewProductAction, createNewProductForm } from './new-product-view
 export const newProductController = (actionContainer, modalContainer) => {
 	const token = localStorage.getItem('token')
 
-	if (!token) return
+	if (token) {
+		const newProductAction = createNewProductAction()
+		const newProductForm = createNewProductForm()
 
-	const newProductAction = createNewProductAction()
-	const newProductForm = createNewProductForm()
+		actionContainer.appendChild(newProductAction)
+		modalContainer.appendChild(newProductForm)
 
-	actionContainer.appendChild(newProductAction)
-	modalContainer.appendChild(newProductForm)
+		const newProductBtn = actionContainer.querySelector('.new-product-btn')
+		const closeModalBtn = newProductForm.querySelector('.close-modal-btn')
 
-	const newProductBtn = actionContainer.querySelector('.new-product-btn')
-	const closeModalBtn = newProductForm.querySelector('.close-modal-btn')
-
-	newProductBtn.addEventListener('click', () =>
-		handleNewProductBtnClicked(actionContainer),
-	)
-	closeModalBtn.addEventListener('click', () =>
-		handleCloseModalClicked(actionContainer),
-	)
-	newProductForm.addEventListener('submit', async (e) => {
-		handleFormSubmit(e, newProductForm, actionContainer)
-	})
+		newProductBtn.addEventListener('click', () =>
+			handleNewProductBtnClicked(actionContainer),
+		)
+		closeModalBtn.addEventListener('click', () =>
+			handleCloseModalClicked(actionContainer),
+		)
+		newProductForm.addEventListener('submit', async (e) => {
+			handleFormSubmit(e, newProductForm, actionContainer)
+		})
+	}
 }
 
 const handleFormSubmit = async (e, form, container) => {
