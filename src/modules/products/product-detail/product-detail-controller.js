@@ -43,7 +43,7 @@ const handleUserActions = async (container, product, getLoggedUserInfo) => {
 	const token = localStorage.getItem('token')
 	const productUserId = product.userId
 
-	if (!token) return
+	if (!token || token === 'null' || token === 'undefined') return
 	try {
 		const loggedUser = await getLoggedUserInfo()
 		if (loggedUser.id === productUserId) {

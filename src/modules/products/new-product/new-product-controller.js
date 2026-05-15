@@ -5,7 +5,7 @@ import { createNewProductAction, createNewProductForm } from './new-product-view
 export const newProductController = (actionContainer, modalContainer) => {
 	const token = localStorage.getItem('token')
 
-	if (token) {
+	if (token && token !== 'null' && token !== 'undefined') {
 		const newProductAction = createNewProductAction()
 		const newProductForm = createNewProductForm()
 
