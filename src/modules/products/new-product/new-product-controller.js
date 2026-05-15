@@ -52,7 +52,7 @@ const handleFormSubmit = async (e, form, container) => {
 		handleProductCreationSucceeded(container)
 		form.reset()
 	} catch (error) {
-		handleProductCreationFailed(container)
+		handleProductCreationFailed(container, error)
 	} finally {
 		const productCreationEnded = new CustomEvent('productCreationEnded')
 		container.dispatchEvent(productCreationEnded)
@@ -69,10 +69,10 @@ const handleCloseModalClicked = (container) => {
 	container.dispatchEvent(closeModalBtnClicked)
 }
 
-const handleProductCreationFailed = (container) => {
+const handleProductCreationFailed = (container, error) => {
 	const productCreationFailed = new CustomEvent('productCreationFailed', {
 		detail: {
-			message: 'No ha sido posible añadir el producto.',
+			message: error.message || 'No ha sido posible añadir el producto.',
 			status: NOTIFICATION_STATUS.error,
 		},
 	})

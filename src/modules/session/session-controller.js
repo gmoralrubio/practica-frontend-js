@@ -24,7 +24,9 @@ export const sessionController = async (sessionContainer) => {
 
 			const userInfoNotFounded = new CustomEvent('userInfoNotFounded', {
 				detail: {
-					message: 'No ha sido posible obtener la información del usuario',
+					message:
+						error.message ||
+						'No ha sido posible obtener la información del usuario',
 					status: NOTIFICATION_STATUS.error,
 				},
 			})

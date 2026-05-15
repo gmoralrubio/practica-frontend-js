@@ -29,7 +29,7 @@ export const productDetailController = async (container, getLoggedUserInfo) => {
 		handleUserActions(container, product, getLoggedUserInfo)
 	} catch (error) {
 		setSessionNotification({
-			message: error.message,
+			message: error.message || 'Error al obtener el producto',
 			status: NOTIFICATION_STATUS.error,
 		})
 		window.location = 'index.html'
@@ -66,7 +66,7 @@ const handleUserActions = async (container, product, getLoggedUserInfo) => {
 	} catch (error) {
 		const userDataFailed = new CustomEvent('userDataFailed', {
 			detail: {
-				message: 'Error al obtener los datos del usuario.',
+				message: error.message || 'Error al obtener los datos del usuario.',
 				status: NOTIFICATION_STATUS.error,
 			},
 		})
@@ -105,7 +105,7 @@ const handleEditProduct = (product) => {
 
 			handleProductEditionSucceeded(modalInnerContainer)
 		} catch (error) {
-			handleProductOperationFailed(modalInnerContainer)
+			handleProductOperationFailed(modalInnerContainer, error)
 		} finally {
 			const productOperationEnded = new CustomEvent('productOperationEnded')
 			modalInnerContainer.dispatchEvent(productOperationEnded)
@@ -131,7 +131,7 @@ const handleDeleteProduct = (product) => {
 
 			handleProductDeletionSucceeded()
 		} catch (error) {
-			handleProductOperationFailed(modalContainer)
+			handleProductOperationFailed(modalContainer, error)
 		} finally {
 			const productOperationEnded = new CustomEvent('productOperationEnded')
 			modalContainer.dispatchEvent(productOperationEnded)
@@ -177,10 +177,10 @@ const handleProductDeletionSucceeded = () => {
 	window.location = 'index.html'
 }
 
-const handleProductOperationFailed = (container) => {
+const handleProductOperationFailed = (container, error) => {
 	const productOperationFailed = new CustomEvent('productOperationFailed', {
 		detail: {
-			message: 'No ha sido posible realizar la operación',
+			message: error.message || 'No ha sido posible realizar la operación',
 			status: NOTIFICATION_STATUS.error,
 		},
 	})

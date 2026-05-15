@@ -26,7 +26,7 @@ export const productsListController = async (productsContainer) => {
 		})
 		productsContainer.dispatchEvent(paginationUpdated)
 	} catch (error) {
-		handleProductsLoadFailed(productsContainer)
+		handleProductsLoadFailed(productsContainer, error)
 	} finally {
 		const productsLoadEnded = new CustomEvent('productsLoadEnded')
 		productsContainer.dispatchEvent(productsLoadEnded)
@@ -51,10 +51,10 @@ const showProducts = (products, productsContainer) => {
 	productsContainer.prepend(productsWrapper)
 }
 
-const handleProductsLoadFailed = (productsContainer) => {
+const handleProductsLoadFailed = (productsContainer, error) => {
 	const productsLoadFailed = new CustomEvent('productsLoadFailed', {
 		detail: {
-			message: 'No ha sido posible obtener productos',
+			message: error.message || 'No ha sido posible obtener productos',
 			status: NOTIFICATION_STATUS.error,
 		},
 	})

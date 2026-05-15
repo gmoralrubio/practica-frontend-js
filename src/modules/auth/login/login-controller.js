@@ -25,7 +25,7 @@ export const loginController = (loginForm) => {
 		} catch (error) {
 			const userLoginFailed = new CustomEvent('userLoginFailed', {
 				detail: {
-					message: error,
+					message: error.message || 'Error al iniciar sesión',
 					status: NOTIFICATION_STATUS.error,
 				},
 			})

@@ -37,7 +37,7 @@ export const signupController = (signupForm) => {
 			} catch (error) {
 				const userNotCreated = new CustomEvent('userNotCreated', {
 					detail: {
-						message: error.message,
+						message: error.message || 'Error al registrar usuario',
 						status: NOTIFICATION_STATUS.error,
 					},
 				})
