@@ -111,7 +111,7 @@ const handleEditProduct = (product) => {
 			modalInnerContainer.dispatchEvent(productOperationEnded)
 		}
 	})
-
+	removePreviousForm(modalInnerContainer)
 	modalInnerContainer.appendChild(editProductForm)
 }
 
@@ -154,7 +154,6 @@ const handleActionBtnClicked = (container) => {
 const handleCloseModalClicked = (container) => {
 	const closeModalBtnClicked = new CustomEvent('closeModalBtnClicked')
 	container.dispatchEvent(closeModalBtnClicked)
-	removePreviousForm(container)
 }
 
 const handleProductEditionSucceeded = (container) => {
@@ -165,7 +164,6 @@ const handleProductEditionSucceeded = (container) => {
 		},
 	})
 	container.dispatchEvent(productEditionSucceeded)
-	removePreviousForm(container)
 }
 
 const handleProductDeletionSucceeded = () => {
