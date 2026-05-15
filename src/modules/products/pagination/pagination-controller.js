@@ -20,6 +20,6 @@ export const paginationController = (paginationContainer, totalProducts) => {
 			paginationContainer.dispatchEvent(paginationChanged)
 		})
 	})
-
+	paginationContainer.innerHTML = ''
 	paginationContainer.appendChild(paginationBtnGroup)
 }
