@@ -1,10 +1,14 @@
 import { debounce } from '../../../utils/utils.js'
+import { createFilters } from './filters-view.js'
 
 export const filtersController = (container) => {
 	const query = new URLSearchParams(window.location.search)
-	const productsPerPage = container.querySelector('#limit')
-	const sort = container.querySelector('#sort')
-	const search = container.querySelector('#search')
+
+	const filters = createFilters(query)
+
+	const productsPerPage = filters.querySelector('#limit')
+	const sort = filters.querySelector('#sort')
+	const search = filters.querySelector('#search')
 	query.set('_page', '1')
 
 	productsPerPage.addEventListener('input', (e) => {
@@ -32,4 +36,6 @@ export const filtersController = (container) => {
 	}
 
 	const debounceSearch = debounce(updateQuery, 1000)
+
+	container.appendChild(filters)
 }
