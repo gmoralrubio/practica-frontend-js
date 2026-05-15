@@ -137,7 +137,7 @@ const handleDeleteProduct = (product) => {
 			modalContainer.dispatchEvent(productOperationEnded)
 		}
 	})
-
+	removePreviousForm(modalContainer)
 	modalContainer.appendChild(deleteProductForm)
 }
 
