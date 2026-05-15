@@ -38,6 +38,7 @@ export const createFilters = (query) => {
           >
             <option
               disabled
+			  selected
             >Selecciona</option>
 			${limitSelect}
           </select>
@@ -51,6 +52,7 @@ export const createFilters = (query) => {
           >
             <option
               disabled
+			  selected
             >Selecciona</option>
 
             ${sortSelect}
