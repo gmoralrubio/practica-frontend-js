@@ -26,7 +26,7 @@ export const productDetailController = async (container, getLoggedUserInfo) => {
 		const productDetail = createProductDetail(product)
 		container.appendChild(productDetail)
 
-		handleUserActions(container, product, getLoggedUserInfo)
+		await handleUserActions(container, product, getLoggedUserInfo)
 	} catch (error) {
 		setSessionNotification({
 			message: error.message || 'Error al obtener el producto',
