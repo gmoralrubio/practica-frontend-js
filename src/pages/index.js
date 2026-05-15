@@ -10,10 +10,10 @@ import { sessionController } from '../modules/session/session-controller.js'
 import { filtersController } from '../modules/products/filters/filters-controller.js'
 import { paginationController } from '../modules/products/pagination/pagination-controller.js'
 
-const loaderContainer = document.querySelector('.loader-container')
 const notificationContainer = document.querySelector('.notification-container')
 const sessionContainer = document.querySelector('.session-container')
 const productsContainer = document.querySelector('.products-container')
+const productsLoaderContainer = document.querySelector('.products-loader-container')
 const newProductActionContainer = document.querySelector('.new-product-action-container')
 const filtersContainer = document.querySelector('.filters-container')
 const paginationContainer = document.querySelector('.pagination-container')
@@ -31,9 +31,11 @@ sessionContainer.addEventListener('userInfoNotFounded', (e) =>
 
 // Product list eventos
 productsContainer.addEventListener('productsLoadStarted', () =>
-	showLoader(loaderContainer),
+	showLoader(productsLoaderContainer),
 )
-productsContainer.addEventListener('productsLoadEnded', () => hideLoader(loaderContainer))
+productsContainer.addEventListener('productsLoadEnded', () =>
+	hideLoader(productsLoaderContainer),
+)
 productsContainer.addEventListener('productsLoadFailed', (e) => {
 	showNotification(notificationContainer, e.detail)
 })
