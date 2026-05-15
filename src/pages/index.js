@@ -8,6 +8,7 @@ import {
 } from '../shared/session-notification/session-notification-controller.js'
 import { sessionController } from '../modules/session/session-controller.js'
 import { filtersController } from '../modules/products/filters/filters-controller.js'
+import { paginationController } from '../modules/products/pagination/pagination-controller.js'
 
 const loaderContainer = document.querySelector('.loader-container')
 const notificationContainer = document.querySelector('.notification-container')
@@ -15,6 +16,7 @@ const sessionContainer = document.querySelector('.session-container')
 const productsContainer = document.querySelector('.products-container')
 const newProductActionContainer = document.querySelector('.new-product-action-container')
 const filtersContainer = document.querySelector('.filters-container')
+const paginationContainer = document.querySelector('.pagination-container')
 const modal = document.querySelector('.modal')
 const modalNotificationContainer = modal.querySelector('.modal-notification-container')
 const modalLoaderContainer = modal.querySelector('.modal-loader-container')
@@ -57,6 +59,18 @@ newProductActionContainer.addEventListener('productCreationFailed', (e) =>
 newProductActionContainer.addEventListener('productCreationSucceeded', (e) => {
 	modal.close()
 	showNotification(notificationContainer, e.detail)
+	productsListController(productsContainer)
+})
+
+// Pagination
+productsContainer.addEventListener('paginationUpdated', (e) => {
+	paginationController(paginationContainer, e.detail.totalProducts)
+})
+paginationContainer.addEventListener('paginationChanged', (e) => {
+	const query = new URLSearchParams(window.location.search)
+	query.set('_page', e.detail.newPage)
+	window.location.search = query
+
 	productsListController(productsContainer)
 })
 

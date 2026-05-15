@@ -10,15 +10,21 @@ export const productsListController = async (productsContainer) => {
 		productsContainer.dispatchEvent(productsLoadStarted)
 
 		const query = window.location.search
-		const products = await getProducts(query)
 
-		if (products.length === 0) {
+		const { products, totalProducts } = await getProducts(query)
+
+		if (totalProducts === 0) {
 			productsWrapper.innerHTML = ''
 			handleNoProducts(productsContainer)
 		} else {
 			noProductsContainer.innerHTML = ''
 			showProducts(products, productsContainer)
 		}
+
+		const paginationUpdated = new CustomEvent('paginationUpdated', {
+			detail: { totalProducts },
+		})
+		productsContainer.dispatchEvent(paginationUpdated)
 	} catch (error) {
 		handleProductsLoadFailed(productsContainer)
 	} finally {
@@ -42,7 +48,7 @@ const showProducts = (products, productsContainer) => {
 
 		productsWrapper.appendChild(newProductElement)
 	})
-	productsContainer.appendChild(productsWrapper)
+	productsContainer.prepend(productsWrapper)
 }
 
 const handleProductsLoadFailed = (productsContainer) => {
