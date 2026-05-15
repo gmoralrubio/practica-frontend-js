@@ -40,3 +40,7 @@
 .products-wrapper {
 	@apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
 }
+
+.pagination-container {
+	@apply flex justify-center mt-6;
+}
