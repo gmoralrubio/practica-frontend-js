@@ -1,11 +1,11 @@
 import { debounce } from '../../../utils/utils.js'
 
 export const filtersController = (container) => {
-	const query = new URLSearchParams()
-
+	const query = new URLSearchParams(window.location.search)
 	const productsPerPage = container.querySelector('#limit')
 	const sort = container.querySelector('#sort')
 	const search = container.querySelector('#search')
+	query.set('_page', '1')
 
 	productsPerPage.addEventListener('input', (e) => {
 		updateQuery({ _limit: e.target.value })
@@ -20,31 +20,16 @@ export const filtersController = (container) => {
 		debounceSearch({ q: e.target.value })
 	})
 
-	// container.addEventListener('input', (e) => {
-
-	// 	const key = `_${e.target.name}`
-	// 	const value = e.target.value
-
-	// 	key === 'q' ? debounceSearch(key, value) : updateQuery(key, value)
-	// })
-
 	const updateQuery = (filter) => {
 		for (const key in filter) {
 			query.set(key, filter[key])
 			if (filter[key] === '') query.delete(key)
 		}
-		console.log(query.toString())
 
-		// query.set(key, value)
-		emitQuery(container, `&${query.toString()}`)
+		window.location.search = `?${query.toString()}`
+		const filtersChanged = new CustomEvent('filtersChanged')
+		container.dispatchEvent(filtersChanged)
 	}
 
 	const debounceSearch = debounce(updateQuery, 1000)
-}
-
-const emitQuery = (container, query) => {
-	const filtersChanged = new CustomEvent('filtersChanged', {
-		detail: { query },
-	})
-	container.dispatchEvent(filtersChanged)
 }

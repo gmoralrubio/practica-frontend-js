@@ -62,8 +62,7 @@ newProductActionContainer.addEventListener('productCreationSucceeded', (e) => {
 
 // Filters
 filtersContainer.addEventListener('filtersChanged', (e) => {
-	const filtersQuery = e.detail.query
-	productsListController(productsContainer, filtersQuery)
+	productsListController(productsContainer)
 })
 
 const sessionNotification = await getSessionNotification('sessionNotification')

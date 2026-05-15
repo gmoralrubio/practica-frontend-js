@@ -2,14 +2,15 @@ import { NOTIFICATION_STATUS } from '../../../shared/notification/notification-c
 import { getProducts } from './products-list-model.js'
 import { createEmptyProductList, createProductList } from './products-list-view.js'
 
-export const productsListController = async (productsContainer, filters = '') => {
+export const productsListController = async (productsContainer) => {
 	const productsWrapper = productsContainer.querySelector('.products-wrapper')
 	const noProductsContainer = productsContainer.querySelector('.no-products-container')
 	try {
 		const productsLoadStarted = new CustomEvent('productsLoadStarted')
 		productsContainer.dispatchEvent(productsLoadStarted)
 
-		const products = await getProducts(filters)
+		const query = window.location.search
+		const products = await getProducts(query)
 
 		if (products.length === 0) {
 			productsWrapper.innerHTML = ''
