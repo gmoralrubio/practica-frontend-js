@@ -8,6 +8,7 @@ export const filtersController = (container) => {
 
 	const productsPerPage = filters.querySelector('#limit')
 	const sort = filters.querySelector('#sort')
+	const tags = filters.querySelector('#tags')
 	const search = filters.querySelector('#search')
 	query.set('_page', '1')
 
@@ -20,14 +21,30 @@ export const filtersController = (container) => {
 		updateQuery({ _sort: sort, _order: order })
 	})
 
+	tags.addEventListener('input', () => {
+		const checkedTags = Array.from(
+			filters.querySelectorAll('input[name="tags"]:checked'),
+		).map((tag) => tag.value)
+		updateQuery({ tags: checkedTags })
+	})
+
 	search.addEventListener('input', (e) => {
 		debounceSearch({ q: e.target.value })
 	})
 
 	const updateQuery = (filter) => {
 		for (const key in filter) {
-			query.set(key, filter[key])
-			if (filter[key] === '') query.delete(key)
+			if (Array.isArray(filter[key])) {
+				// Tags
+				query.delete(key)
+				for (const value of filter[key]) {
+					query.append(key, value)
+				}
+			} else {
+				// Resto filtros
+				query.set(key, filter[key])
+				if (filter[key] === '') query.delete(key)
+			}
 		}
 
 		window.location.search = `?${query.toString()}`

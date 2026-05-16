@@ -3,6 +3,11 @@ import { formatNumberToEuro } from '../../../utils/utils.js'
 export const createProductDetail = (product) => {
 	const readableDate = new Date(product.updatedAt)
 	const readablePrice = formatNumberToEuro(product.price)
+	const readableTags = {
+		tech: 'Tecnología',
+		sport: 'Deportes',
+		home: 'Hogar',
+	}
 
 	const productDetail = document.createElement('div')
 	productDetail.classList.add('max-w-4xl', 'mx-auto')
@@ -36,14 +41,16 @@ export const createProductDetail = (product) => {
                     	${readablePrice}
                     </p>
                   </div>
-
+				  
                   <div class="mb-6">
                     <h2 class="text-md font-medium mb-2">Descripción</h2>
                     <p class="text-base-content/80 leading-relaxed">
 						${product.description}
                     </p>
                   </div>
-
+				  <div class="mb-6 flex gap-2">
+				     ${product.tags.map((tag) => `<div class="badge badge-outline badge-accent">${readableTags[tag]}</div>`).join('')}
+				  </div>
                   <div class="divider"></div>
                   <div class="grid grid-cols-2 gap-4 text-sm">
                     <div>

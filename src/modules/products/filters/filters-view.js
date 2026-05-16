@@ -4,8 +4,10 @@ export const createFilters = (query) => {
 	const order = query.get('_order')
 	const sortOrder = `${sort}_${order}`
 	const search = query.get('q')
+	const tags = query.getAll('tags')
 
 	const limitOptions = [5, 10, 15]
+
 	const sortOptions = {
 		name_asc: 'Nombre ascendente',
 		name_desc: 'Nombre descendente',
@@ -13,7 +15,7 @@ export const createFilters = (query) => {
 		price_desc: 'Precio descendente',
 	}
 
-	let limitSelect = limitOptions
+	const limitSelect = limitOptions
 		.map((option) => {
 			return `<option value="${option}" ${limit === option ? 'selected' : ''}>${option}</option>`
 		})
@@ -23,6 +25,18 @@ export const createFilters = (query) => {
 	for (const option in sortOptions) {
 		const selectOpt = `<option value="${option}" ${sortOrder === option ? 'selected' : ''} >${sortOptions[option]}</option>`
 		sortSelect += selectOpt
+	}
+
+	const tagsSelect = {
+		tech: 'Tecnología',
+		sport: 'Deportes',
+		home: 'Hogar',
+	}
+
+	let tagsGroup = ''
+	for (const tag in tagsSelect) {
+		const tagEl = `<input class="btn btn-xs" type="checkbox" name="tags" value="${tag}" aria-label="${tagsSelect[tag]}" ${tags.includes(tag) ? 'checked' : ''} />`
+		tagsGroup += tagEl
 	}
 
 	const filtersWrapper = document.createElement('div')
@@ -58,6 +72,16 @@ export const createFilters = (query) => {
             ${sortSelect}
           </select>
         </fieldset>
+		<fieldset class="fieldset">
+			<div id="tags">
+				<div class="flex justify-between items-center mb-1">
+					<legend class="fieldset-legend">Etiquetas</legend>	
+				</div>
+				<div class="flex gap-2">
+					${tagsGroup}
+				</div>
+			</div>
+		</fieldset>
         <fieldset class="fieldset">
           <legend class="fieldset-legend">Buscar producto</legend>
           <label class="input">

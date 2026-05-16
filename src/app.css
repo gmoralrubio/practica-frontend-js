@@ -28,7 +28,7 @@
 }
 
 .filters-container {
-	@apply col-span-3 h-80 card rounded-box bg-white p-4 shadow-md;
+	@apply col-span-3 h-100 card rounded-box bg-white p-4 shadow-md;
 }
 
 .no-products-container {

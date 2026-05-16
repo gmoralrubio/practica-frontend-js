@@ -1,8 +1,6 @@
 # Wallaclon — Práctica final módulo Frontend con JavaScript
 
-Aplicación web de compraventa de artículos de segunda mano. Permite a usuarios registrados publicar, editar, eliminar y filtrar productos por nombre, precio y categoría.
-
-Construida con **JavaScript vanilla** (ES Modules) siguiendo un patrón Modelo-Vista-Controlador con comunicación por eventos.
+Aplicación web de compraventa de artículos de segunda mano. Permite a usuarios registrados publicar, editar, eliminar y filtrar productos por nombre, precio, categoría y etiquetas (tags).
 
 > [!WARNING]
 > Esto es un **proyecto de práctica** y no está pensado para producción. La generación de HTML se realiza mediante `innerHTML` con datos de usuario sin sanitizar, lo que lo hace **vulnerable a XSS**. No despliegues esto en un entorno público.
@@ -61,14 +59,15 @@ Endpoints disponibles:
 
 Parámetros de consulta soportados por `GET /api/products`:
 
-| Parámetro | Descripción          | Ejemplo         |
-| --------- | -------------------- | --------------- |
-| `_page`   | Número de página     | `?_page=2`      |
-| `_limit`  | Productos por página | `?_limit=10`    |
-| `_sort`   | Campo de ordenación  | `?_sort=price`  |
-| `_order`  | Dirección del orden  | `?_order=asc`   |
-| `q`       | Búsqueda por texto   | `?q=iphone`     |
-| `_expand` | Incluir relación     | `?_expand=user` |
+| Parámetro | Descripción           | Ejemplo                 |
+| --------- | --------------------- | ----------------------- |
+| `_page`   | Número de página      | `?_page=2`              |
+| `_limit`  | Productos por página  | `?_limit=10`            |
+| `_sort`   | Campo de ordenación   | `?_sort=price`          |
+| `_order`  | Dirección del orden   | `?_order=asc`           |
+| `q`       | Búsqueda por texto    | `?q=iphone`             |
+| `tags`    | Filtrar por etiquetas | `?tags=tech&tags=sport` |
+| `_expand` | Incluir relación      | `?_expand=user`         |
 
 ## Arrancar el proyecto
 
@@ -119,6 +118,7 @@ Los productos se pueden filtrar por:
 - **Búsqueda**: texto parcial sobre el nombre
 - **Orden**: nombre ascendente/descendente o precio ascendente/descendente
 - **Productos por página**: 5, 10 o 15
+- **Etiquetas (tags)**: combinación de `tech`, `sport` y `home`. Se pueden seleccionar varias simultáneamente, generando una query del tipo `?tags=tech&tags=sport`. Los productos tienen de 1 a 3 etiquetas asignadas.
 
 ## Funcionamiento general
 
@@ -175,5 +175,5 @@ public/
 ├── assets/                         # Recursos estáticos
 └── dist/styles.css                 # CSS compilado
 data/
-└── db.json                         # Datos de prueba (usuarios + 20 productos)
+└── db.json                         # Datos de prueba (usuarios + 30 productos)
 ```

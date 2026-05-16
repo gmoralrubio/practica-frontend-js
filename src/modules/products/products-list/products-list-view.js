@@ -2,6 +2,11 @@ import { formatNumberToEuro } from '../../../utils/utils.js'
 
 export const createProductList = (product) => {
 	const readablePrice = formatNumberToEuro(product.price)
+	const readableTags = {
+		tech: 'Tecnología',
+		sport: 'Deportes',
+		home: 'Hogar',
+	}
 
 	const productElement = document.createElement('div')
 	productElement.classList.add('card', 'bg-base-100', 'shadow-sm')
@@ -16,6 +21,9 @@ export const createProductList = (product) => {
 	</figure>
 	<div class="card-body gap-3">
 		<h2 class="card-title">${product.name}</h2>
+		<div class="flex gap-2">
+			${product.tags.map((tag) => `<div class="badge badge-outline badge-accent badge-sm">${readableTags[tag]}</div>`).join('')}
+		</div>
 		<p>${product.description}</p>
 		<p class="text-lg">${readablePrice}</p>
 		<div class="card-actions justify-end">
