@@ -10,7 +10,7 @@ export const getProducts = async (query) => {
 
 	const headers = response.headers
 
-	const totalProducts = headers.get('X-total-count')
+	const totalProducts = Number(headers.get('X-total-count'))
 
 	return { products: data, totalProducts }
 }
