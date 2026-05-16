@@ -21,7 +21,15 @@ npm install
 
 ## Backend (API REST)
 
-El proyecto consume una API REST provista por [sparrest.js](https://github.com/kasappeal/sparrest.js), con autenticación JWT. Para configurarlo:
+El proyecto consume una API REST provista por [sparrest.js](https://github.com/kasappeal/sparrest.js), con autenticación JWT.
+
+Los datos de prueba se encuentran en:
+
+```bash
+./data/db.json
+```
+
+Para configurarlo:
 
 ```bash
 # Clonar el repositorio
