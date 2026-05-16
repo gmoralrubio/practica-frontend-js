@@ -29,7 +29,7 @@ signupForm.addEventListener('userCreated', async (e) => {
 		window.location = 'index.html'
 	} catch (error) {
 		showNotification(notificationContainer, {
-			message: error,
+			message: error || 'Error al registrar usuario.',
 			status: NOTIFICATION_STATUS.error,
 		})
 	}
