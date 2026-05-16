@@ -214,7 +214,7 @@ export const createEditProductForm = (product) => {
 				id="product-image"
 				placeholder="https://"
 				class="input w-full"
-				value=${product.image}
+				value="${product.image}"
 			/>
 
 			<span
